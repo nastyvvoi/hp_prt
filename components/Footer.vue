@@ -61,14 +61,14 @@ hr {
   margin: 0;
 }
 
-.talk_banner_div {
-  margin: 0px !important;
+.footer {
+  flex-shrink: 0;
+  color: white;
+  background-color: gray;
 }
 
-.newsletter {
-  height: 38px;
-  margin-top: 0px;
-  margin-bottom: 30px;
+.talk_banner_div {
+  margin: 0px !important;
 }
 
 .talk_expose_whiteon {
@@ -98,11 +98,6 @@ hr {
   }
   .talk_banner_div {
     margin-top: 10% !important;
-  }
-  .newsletter {
-    height: 38px;
-    margin-top: 10%;
-    margin-bottom: 30px;
   }
 }
 </style>

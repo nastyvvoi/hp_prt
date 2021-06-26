@@ -2,7 +2,9 @@
   <div class="app">
     <div class="main">
       <Navbar/>
-      <nuxt/>
+      <section class="content-section">
+        <nuxt/>
+      </section>
       <Footer/>
     </div>
   </div>
@@ -80,6 +82,12 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  height: 100% !important;
+}
+body {
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
 }
 
 *,
@@ -88,19 +96,17 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+.app {
+  height: 100% !important;
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+.main {
+  padding-top: 100px;
+  height: 100% !important;
+}
+
+.content-section {
+  flex: 1 !important;
 }
 
 .button--grey {

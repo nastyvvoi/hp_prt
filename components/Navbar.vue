@@ -1,19 +1,26 @@
 <template>
     <div>
-      <b-navbar toggleable="lg" type="dark" variant="info" sticky>
-        <b-navbar-brand to="/">NavBar</b-navbar-brand>
+      <b-navbar class="navbar fixed-top" toggleable="lg" variant="info">
+        <b-navbar-brand to="/" @click="navClick">NavBar-이미지자리</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item to="/about">회사소개</b-nav-item>
-            <b-nav-item to="/product">제품소개</b-nav-item>
-            <b-nav-item to="/notice">공지사항</b-nav-item>
-            <b-nav-item to="/location">오시는길</b-nav-item>
+            <b-nav-item to="/about" @click="navClick">회사소개</b-nav-item>
+            <b-nav-item to="/product" @click="navClick">제품소개</b-nav-item>
+            <b-nav-item to="/notice" @click="navClick">공지사항</b-nav-item>
+            <b-nav-item to="/location" @click="navClick">오시는길</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
+      <div class="banner_area">
+        <img class="img_banner" src="~/assets/photo/bg_building.jpg"/>
+        <div class="text_banner">
+          <p>{{currentPage}}</p>
+          <p style="font-size:26px">주식회사 **</p>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -22,6 +29,7 @@
 export default {
   data() {
     return {
+      currentPage: "메인페이지",
       isie: true,
       scrolled: null,
       toggle: null,
@@ -30,58 +38,70 @@ export default {
     };
   },
   methods: {
-    signOut() {
-      Firebase.auth()
-        .signOut()
-        .then(() => {
-          window.location.reload();
-        });
+    navClick() {
+      var pathName = $nuxt.$route.name
+      if(pathName == "about")
+        this.currentPage = "회사소개"
+      else if(pathName == "product")
+        this.currentPage = "제품소개"
+      else if(pathName == "notice")
+        this.currentPage = "공지사항"
+      else if(pathName == "location")
+        this.currentPage = "오시는길"
+      else
+        this.currentPage = "메인페이지"
     },
     onresize() {
       if (window.innerWidth > 1000) {
         this.open = false;
       }
-    }
+    },
+    browserCheck() {
+      navigator.sayswho = (function() {
+        var ua = navigator.userAgent,
+          tem,
+          M =
+            ua.match(
+              /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
+            ) || [];
+        if (/trident/i.test(M[1])) {
+          tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+          return "IE " + (tem[1] || "");
+        }
+        if (M[1] === "Chrome") {
+          tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+          if (tem != null)
+            return tem
+              .slice(1)
+              .join(" ")
+              .replace("OPR", "Opera");
+        }
+        M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, "-?"];
+        if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
+          return M.join(" ");
+      })();
+
+      // if (!(navigator.sayswho.includes('Chrome') || navigator.sayswho.includes('Safari') || navigator.sayswho.includes(
+      //     'Opera') || navigator.sayswho.includes('Firefox'))) {
+      if (navigator.sayswho.includes("IE")) {
+        this.isie = true;
+      } else {
+        this.isie = false;
+      }
+      // console.log(navigator.sayswho); // outputs: `Chrome 62`
+      }
   },
 
   computed: {
 
   },
   beforeUpdate() {},
-
+  created() {
+    
+  },
   beforeMount() {
-    navigator.sayswho = (function() {
-      var ua = navigator.userAgent,
-        tem,
-        M =
-          ua.match(
-            /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
-          ) || [];
-      if (/trident/i.test(M[1])) {
-        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-        return "IE " + (tem[1] || "");
-      }
-      if (M[1] === "Chrome") {
-        tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
-        if (tem != null)
-          return tem
-            .slice(1)
-            .join(" ")
-            .replace("OPR", "Opera");
-      }
-      M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, "-?"];
-      if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
-      return M.join(" ");
-    })();
-
-    // if (!(navigator.sayswho.includes('Chrome') || navigator.sayswho.includes('Safari') || navigator.sayswho.includes(
-    //     'Opera') || navigator.sayswho.includes('Firefox'))) {
-    if (navigator.sayswho.includes("IE")) {
-      this.isie = true;
-    } else {
-      this.isie = false;
-    }
-    // console.log(navigator.sayswho); // outputs: `Chrome 62`
+    this.navClick()
+    // this.browserCheck()
   },
 
   beforeDestroy() {
@@ -90,44 +110,39 @@ export default {
 };
 </script>
 <style scoped>
+
+.bg-info {
+  background-color: #fff !important;
+  height: 100px;
+}
+
+.banner_area {
+  position: relative;
+}
+
+.img_banner {
+  height: 300px;
+  width: 1440px;
+  opacity: 0.9;
+}
+
+.text_banner {
+  color: #fff;
+  font-size: 40px;
+  text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+  transform: translate( -50%, -50% );
+}
+
 a {
   text-decoration: none;
-}
-
-.ff {
-  position: fixed;
-  width: 100%;
-  z-index: 201;
-  margin: 0;
-  min-width: fit-content;
-}
-
-.center {
-  display: inline-block;
-  vertical-align: unset;
-}
-
-.mainnav {
-  vertical-align: baseline !important;
-  margin: 0;
-  background-color: white;
-  transition: 0.5s;
-  color: black;
+  color:black;
 }
 
 .b-navbar-brand {
   height: 50px;
-}
-
-.mainnavt {
-  margin: 0;
-  border-bottom: 1.1px solid #444444;
-  background: rgba(255, 255, 255, 0.1);
-  transition: 0.5s;
-}
-
-.isPopUp {
-  top: 4.4%;
 }
 
 .nav-item {

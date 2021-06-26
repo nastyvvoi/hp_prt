@@ -2,13 +2,39 @@
 /* @import "https://use.fontawesome.com/releases/v5.3.1/css/all.css"; */
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR');
 
-@font-face {
+/* @font-face {
   font-family: 'impacttest';
   src: url(../font/impact.eot) format('eot');
   src: url(../font/impact.ttf) format('ttf');
   src: url(../font/impact.eot);
   src: url(../font/impact.ttf)
-}
+} */
 body {
   min-width: 100%;
 }
+
+html * {
+  
+    font-family: "Noto Sans KR", sans-serif;
+  }
+  
+  .clear {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .toggle {
+    display: inline-block;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* @media (max-width: 2000px) {
+    .CONTRACT-STEP i {
+    font-size: 3em;
+    }
+  } */
+
+  #__nuxt, #__layout {
+      height: 100% !important;
+  }

@@ -1,6 +1,6 @@
 <template> 
 <div class="w-100">
-       <section class="loactionBanner">
+    <section class="loactionBanner">
       <h2>오시는 길</h2>
       <div class="title">
       </div>
