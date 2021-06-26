@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <h1 class="title">
-        hp_prt
+        메인 페이지
       </h1>
     </div>
   </div>

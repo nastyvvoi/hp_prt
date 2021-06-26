@@ -2,12 +2,7 @@
   <div class="app">
     <div class="main">
       <Navbar/>
-      <!-- <no-ssr>
-        <PopUpToolBar :open.sync="open"/>
-      </no-ssr>
-      <newToolBar :popUpOpen="open"/>
-      <Navbar :popUpOpen="open"/> -->
-      <nuxt class="nuxt"/>
+      <nuxt/>
       <Footer/>
     </div>
   </div>

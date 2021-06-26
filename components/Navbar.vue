@@ -1,23 +1,16 @@
 <template>
-    <!-- Image and text -->
     <div>
-      <b-navbar 
-        id="forclp"
-        toggleable="lg"
-        sticky
-      >
-        <!-- <b-navbar-toggle target="nav_collapse" @click.native="changeback"></b-navbar-toggle> -->
-        <b-collapse is-nav id="nav_collapse">
-          <!-- <b-navbar-brand class="navbrand" to="/">
-            <img src="~/assets/photo/1111_.png" class alt="BV">
-          </b-navbar-brand> -->
-          <b-navbar-nav class="navContent ml-auto">
-            <!-- <b-nav-item to="/" class="mainlink">MAIN</b-nav-item> -->
+      <b-navbar toggleable="lg" type="dark" variant="info" sticky>
+        <b-navbar-brand to="/">NavBar</b-navbar-brand>
+
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
             <b-nav-item to="/about">회사소개</b-nav-item>
             <b-nav-item to="/product">제품소개</b-nav-item>
             <b-nav-item to="/notice">공지사항</b-nav-item>
-            <b-nav-item style="padding-right:11px;" to="/location">오시는길</b-nav-item>
-            <v-spacer style="width:100px;"></v-spacer>
+            <b-nav-item to="/location">오시는길</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -101,27 +94,6 @@ a {
   text-decoration: none;
 }
 
-.userinfo {
-  text-align: center;
-}
-
-.userinfo a {
-  display: inline;
-
-  font-weight: bold;
-  color: rgb(235, 13, 13) !important;
-  font-size: 0.5rem;
-  padding-left: 0.5rem !important;
-  text-align: center;
-}
-
-.userinfo span {
-  padding-top: 11px;
-  color: #2ebd7f;
-  font-size: large;
-  font-weight: bold;
-}
-
 .ff {
   position: fixed;
   width: 100%;
@@ -188,18 +160,6 @@ img {
   }
 }
 
-.username {
-  font: 550 21px "Fjalla One", sans-serif;
-  padding: 10px;
-  padding-bottom: 0;
-  z-index: -1;
-}
-
-@media (max-width: 768px) {
-  .username {
-    display: none;
-  }
-}
 
 /* .useChrome{ display: none;
 
