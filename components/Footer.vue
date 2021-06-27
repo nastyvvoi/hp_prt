@@ -1,25 +1,62 @@
 <template>
   <!-- FOOTER -->
   <footer class="footer">
-    <v-card flat title height class="black lighten-1 text-xs-center">
-    </v-card>
-    <v-divider></v-divider>
     <div class="info">
-      <p>
-        주식회사 *** 사업자 등록번호: ***-**-*****
-        <br>
-        주소 : *************
-        <br>
-        대표전화: ***-***-**** FAX: ***-***-****
-        <br>
-        COPYRIGHTⓒ {{this.getFullYear}} ***********. All Rights Reserved.
-      </p>
-      <div class="footer-phone row justify-content-center">
-        <div class="col-md-6">
-          <span>전화 문의: 9시-18시</span>
-        </div>
+      <div class="logo_area">
+        <img src="~assets/photo/no_image.png" style="height:100px;width:150px"/>
       </div>
-      <p></p>
+      <div class="info_area">
+        <p class="info_text">
+          <span class="info_row">
+            <strong class="strong_text">
+              (주) **
+            </strong>
+            <strong class="strong_text">
+              대표
+            </strong>
+              ***
+            <strong class="strong_text">
+              사업자 등록번호
+            </strong>
+              ***-**-*****
+          </span>
+          <br>
+          <span class="info_row">
+            <strong class="strong_text">
+              주소
+            </strong>
+              *************
+            <strong class="strong_text">
+              E-mail
+            </strong>
+              ****@*****.com
+          </span>
+          <br>
+          <span class="info_row">
+            <strong class="strong_text">
+              대표전화
+            </strong>
+              ***-***-****
+            <strong class="strong_text">
+              FAX
+            </strong>
+              ***-***-****
+          </span>
+          <br>
+          <br>
+          <span class="info_row">
+            <strong class="strong_text">
+              COPYRIGHTⓒ {{this.getFullYear}} ***********. 
+            </strong>
+              All Rights Reserved.
+          </span>
+        </p>
+        <!-- <div class="footer-phone row justify-content-center">
+          <div class="col-md-6">
+            <span>전화 문의: 9시-18시</span>
+          </div>
+        </div> -->
+      </div>
     </div>
   </footer>
 </template>
@@ -62,9 +99,44 @@ hr {
 }
 
 .footer {
-  flex-shrink: 0;
-  color: white;
-  background-color: gray;
+  /* flex-shrink: 0; */
+  height: 190px;
+  background-color: #f6f6f6;
+  color: #777777;
+  position: relative;
+}
+
+.info {
+  padding-top: 30px;
+  padding-left:100px;
+}
+
+.logo_area {
+  /* padding-left: 100px; */
+  height: 100px;
+  width: 150px;
+  float: left;
+}
+
+.info_area {
+  padding-left: 100px;
+  float: left;
+}
+
+.info_text {
+  color: #777777;
+}
+
+.info_row {
+  display: inline-block;
+  height: 30px;
+}
+
+.strong_text {
+  font-weight: 700;
+  color: #5c5c5c;
+  margin-left: 30px;
+  margin-right: 15px;
 }
 
 .talk_banner_div {

@@ -36,5 +36,5 @@ html * {
   } */
 
   #__nuxt, #__layout {
-      height: 100% !important;
+      /* height: 100% !important; */
   }

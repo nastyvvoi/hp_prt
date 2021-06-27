@@ -2,9 +2,9 @@
   <div class="app">
     <div class="main">
       <Navbar/>
-      <section class="content-section">
+      <div class="container">
         <nuxt/>
-      </section>
+      </div>
       <Footer/>
     </div>
   </div>
@@ -97,16 +97,16 @@ body {
   margin: 0;
 }
 .app {
-  height: 100% !important;
+  /* height: 100% !important; */
 }
 
 .main {
   padding-top: 100px;
-  height: 100% !important;
+  /* height: 100% !important; */
 }
 
 .content-section {
-  flex: 1 !important;
+  /* flex: 1 !important; */
 }
 
 .button--grey {

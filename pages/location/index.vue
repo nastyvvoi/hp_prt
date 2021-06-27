@@ -1,13 +1,7 @@
 <template> 
-<div class="w-100">
-    <section class="loactionBanner">
-      <h2>오시는 길</h2>
-      <div class="title">
-      </div>
-    </section>
-      <div class="back_area" style="height:100%">
+  <div class="w-100">
+    <div class="back_area" style="height:100%">
       <v-tabs v-if="offSetWidth!==''&& offSetWidth>800" grow color="black" dark icons-and-text>
-        <v-tabs-slider color="#2ebd7f"></v-tabs-slider>
         <v-tab v-for="item in items" :key="item.name" ripple style="cursor:pointer;">
           <span>
             <i active :class="item.icon"></i>
@@ -42,7 +36,7 @@
           </div>
         </v-tab-item>
       </v-tabs>
-       <v-expansion-panel v-if="offSetWidth!==''&& offSetWidth<800" dark>
+      <v-expansion-panel v-if="offSetWidth!==''&& offSetWidth<800" dark>
         <v-expansion-panel-content v-for="item in items" :key="item.name">
           <template v-slot:header>
             <div>

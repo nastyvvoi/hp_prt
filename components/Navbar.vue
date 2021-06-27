@@ -1,12 +1,15 @@
 <template>
     <div>
       <b-navbar class="navbar fixed-top" toggleable="lg" variant="info">
-        <b-navbar-brand to="/" @click="navClick">NavBar-이미지자리</b-navbar-brand>
+        <b-navbar-brand to="/" @click="navClick">
+          <img src="~/assets/photo/no_image.png" class alt="BV">
+          NavBar-이미지자리
+        </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
-          <b-navbar-nav>
+          <b-navbar-nav class="ml-auto menu_group">
             <b-nav-item to="/about" @click="navClick">회사소개</b-nav-item>
             <b-nav-item to="/product" @click="navClick">제품소개</b-nav-item>
             <b-nav-item to="/notice" @click="navClick">공지사항</b-nav-item>
@@ -147,16 +150,38 @@ a {
 
 .nav-item {
   box-sizing: border-box;
-  padding-left: 11px;
+  padding: 5px;
 }
 
 .nav-item:hover {
   font-weight: 1000;
+  /* text-decoration:underline; */
 }
 
 img {
   height: 5vh;
 }
+
+.menu_group {
+  padding-right: 100px;
+}
+
+.nav-link::before {
+  transition: 300ms;
+  height: 3px;
+  content: "";
+  position: absolute;
+  background-color: #031D44;
+  width: 0%;
+  bottom: 28px;
+}
+
+
+.nav-link:hover::before {
+  bottom: 28px;
+  width: 60px;
+}
+
 
 .navbar-inverse .navbar-collapse {
   background-color: white;
