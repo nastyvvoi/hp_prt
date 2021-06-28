@@ -3,7 +3,7 @@
   <footer class="footer">
     <div class="info">
       <div class="logo_area">
-        <img src="~assets/photo/no_image.png" style="height:100px;width:150px"/>
+        <img src="~assets/image/Logo.jpeg" style="height:80px;width:253px"/>
       </div>
       <div class="info_area">
         <p class="info_text">
@@ -18,7 +18,7 @@
             <strong class="strong_text">
               사업자 등록번호
             </strong>
-              ***-**-*****
+              111-11-11111
           </span>
           <br>
           <span class="info_row">
@@ -36,11 +36,11 @@
             <strong class="strong_text">
               대표전화
             </strong>
-              ***-***-****
+              111-111-1111
             <strong class="strong_text">
               FAX
             </strong>
-              ***-***-****
+              111-111-1111
           </span>
           <br>
           <br>
@@ -108,7 +108,7 @@ hr {
 
 .info {
   padding-top: 30px;
-  padding-left:100px;
+  padding-left:150px;
 }
 
 .logo_area {
@@ -119,7 +119,7 @@ hr {
 }
 
 .info_area {
-  padding-left: 100px;
+  padding-left: 200px;
   float: left;
 }
 

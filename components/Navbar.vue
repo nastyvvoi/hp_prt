@@ -2,8 +2,7 @@
     <div>
       <b-navbar class="navbar fixed-top" toggleable="lg" variant="info">
         <b-navbar-brand to="/" @click="navClick">
-          <img src="~/assets/photo/no_image.png" class alt="BV">
-          NavBar-이미지자리
+          <img src="~/assets/image/Logo.jpeg" class alt="BV" style="height:80px;width:253px">
         </b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -18,7 +17,7 @@
         </b-collapse>
       </b-navbar>
       <div class="banner_area">
-        <img class="img_banner" src="~/assets/photo/bg_building.jpg"/>
+        <img class="img_banner" src="~/assets/image/bg_main.jpeg"/>
         <div class="text_banner">
           <p>{{currentPage}}</p>
           <p style="font-size:26px">주식회사 **</p>
@@ -121,16 +120,20 @@ export default {
 
 .banner_area {
   position: relative;
+  /* background-color: black; */
+  width: 100%;
 }
 
 .img_banner {
-  height: 300px;
-  width: 1440px;
-  opacity: 0.9;
+  height: 500px;
+  width: 1280px;
+  opacity: 0.8;
+  display: block; 
+  margin: 0px auto;
 }
 
 .text_banner {
-  color: #fff;
+  color: white;
   font-size: 40px;
   text-align: center;
 	position: absolute;
