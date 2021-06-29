@@ -1,11 +1,49 @@
 <template>
-  <div class="container">
-    <div>
-      <h1>
-        메인 페이지
-      </h1>
+    <div class="container">
+        <b-container class="about_container">
+            <b-row class="about_row text-center" align-v="center">
+                <b-col class="ml-md-auto">
+                    <div class="img_box">
+                        <img class="round_img" src="~/assets/image/company_thumb.png"/>
+                    </div>
+                    <div>
+                        <p>
+                            회사소개 | Company
+                        </p>
+                        <p>
+                          (주)일신은 Condenser 생산 전문업체입니다.
+                        </p>
+                    </div>
+                </b-col>
+                <b-col class="ml-md-auto">
+                    <div class="img_box">
+                        <img class="round_img" src="~/assets/image/product_thumb.jpg"/>
+                    </div>
+                    <p>
+                        제품소개 | Product
+                    </p>
+                </b-col>
+            </b-row>
+            <b-row class="about_row text-center" align-v="center">
+                <b-col class="ml-md-auto">
+                    <div class="img_box">
+                        <img class="round_img" src="~/assets/image/no_image.png"/>
+                    </div>
+                    <p>
+                        공지사항 | Notice
+                    </p>
+                </b-col>
+                <b-col class="ml-md-auto">
+                    <div class="img_box">
+                        <img class="round_img" src="~/assets/image/no_image.png"/>
+                    </div>
+                    <p>
+                        오시는길 | Location
+                    </p>
+                </b-col>
+            </b-row>
+        </b-container>
     </div>
-  </div>
 </template>
 
 <script>
@@ -13,42 +51,17 @@ export default {}
 </script>
 
 <style scoped>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+
+.about_row {
+    heigh: 350px;
+    align: center;
 }
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.img_box {
+    height: 150px;
+    width: 150px;
+    border-radius: 70%;
+    overflow: hidden;
+    display: inline-block;
 }
 </style>

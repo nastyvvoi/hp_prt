@@ -9,12 +9,12 @@
         <p class="info_text">
           <span class="info_row">
             <strong class="strong_text">
-              (주) **
+              (주) 일신
             </strong>
             <strong class="strong_text">
               대표
             </strong>
-              ***
+              박덕자
             <strong class="strong_text">
               사업자 등록번호
             </strong>

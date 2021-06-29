@@ -20,7 +20,7 @@
         <img class="img_banner" src="~/assets/image/bg_main.jpeg"/>
         <div class="text_banner">
           <p>{{currentPage}}</p>
-          <p style="font-size:26px">주식회사 **</p>
+          <p style="font-size:26px; color:white">주식회사 일신</p>
         </div>
       </div>
     </div>
@@ -133,7 +133,7 @@ export default {
 }
 
 .text_banner {
-  color: white;
+  color: black;
   font-size: 40px;
   text-align: center;
 	position: absolute;
