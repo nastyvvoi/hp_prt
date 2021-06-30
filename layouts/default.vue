@@ -2,7 +2,7 @@
   <div class="app">
     <div class="main">
       <Navbar/>
-      <div>
+      <div class="container">
         <nuxt/>
       </div>
       <Footer/>
