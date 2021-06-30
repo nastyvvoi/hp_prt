@@ -1,7 +1,36 @@
 <template>
-    <div>
-        <h1>
-            제품소개
-        </h1>
+    <div class="container">
+        <div class="title">
+            <p>
+                제품소개 | Product
+            </p>
+            <hr/>
+        </div>
     </div>
 </template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style scoped>
+.container {
+    width: 100%;
+    margin: auto;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: 500;
+    padding-top: 40px;
+}
+
+.hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 2px solid #5c5c5c;
+}
+</style>
