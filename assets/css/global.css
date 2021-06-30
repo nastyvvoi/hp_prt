@@ -2,20 +2,24 @@
 /* @import "https://use.fontawesome.com/releases/v5.3.1/css/all.css"; */
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR');
 
-/* @font-face {
-  font-family: 'impacttest';
+@font-face {
+  /* font-family: 'impacttest';
   src: url(../font/impact.eot) format('eot');
   src: url(../font/impact.ttf) format('ttf');
   src: url(../font/impact.eot);
-  src: url(../font/impact.ttf)
-} */
+  src: url(../font/impact.ttf) */
+  font-family: 'haru';
+    src: url('../font/haru_medium.ttf') format('truetype');
+}
 body {
   min-width: 100%;
+  font-family: 'haru';
 }
 
 html * {
   
-    font-family: "Noto Sans KR", sans-serif;
+    /* font-family: "Noto Sans KR", sans-serif; */
+    font-family: 'haru';
   }
   
   .clear {

@@ -17,10 +17,15 @@
         </b-collapse>
       </b-navbar>
       <div class="banner_area">
-        <img class="img_banner" src="~/assets/image/bg_main.jpeg"/>
-        <div class="text_banner">
-          <p>{{currentPage}}</p>
-          <p style="font-size:26px; color:white">주식회사 일신</p>
+        <div v-if="isMain">
+          <img class="img_banner" src="~/assets/image/bg_main.jpeg"/>
+          <div class="text_banner">
+            <p>{{currentPage}}</p>
+            <p style="font-size:26px; color:white">{{since}}</p>
+          </div>
+        </div>
+        <div v-else>
+          <img class="img_bg" src="~/assets/image/default_bg.png"/>
         </div>
       </div>
     </div>
@@ -31,7 +36,9 @@
 export default {
   data() {
     return {
-      currentPage: "메인페이지",
+      currentPage: "축적된 노하우로 최상의 제품을 공급합니다",
+      since: "since 2013",
+      isMain: true,
       isie: true,
       scrolled: null,
       toggle: null,
@@ -41,17 +48,18 @@ export default {
   },
   methods: {
     navClick() {
-      var pathName = $nuxt.$route.name
-      if(pathName == "about")
-        this.currentPage = "회사소개"
-      else if(pathName == "product")
-        this.currentPage = "제품소개"
-      else if(pathName == "notice")
-        this.currentPage = "공지사항"
-      else if(pathName == "location")
-        this.currentPage = "오시는길"
-      else
-        this.currentPage = "메인페이지"
+      var pathName = this.$route.path
+      // console.log(pathName)
+      if(pathName == "/"){
+        this.currentPage = "축적된 노하우로 최상의 제품을 공급합니다"
+        this.since = "since 2013"
+        this.isMain = true
+      }
+      else {
+        this.currentPage = ""
+        this.since = ""
+        this.isMain = false
+      }
     },
     onresize() {
       if (window.innerWidth > 1000) {
@@ -99,13 +107,15 @@ export default {
   },
   beforeUpdate() {},
   created() {
-    
+    this.navClick()
   },
   beforeMount() {
-    this.navClick()
+    // this.navClick()
     // this.browserCheck()
   },
-
+  beforeUpdate() {
+    // this.navClick()
+  },
   beforeDestroy() {
 
   }
@@ -125,21 +135,26 @@ export default {
 }
 
 .img_banner {
-  height: 500px;
-  width: 1280px;
+  height: 700px;
+  min-width: 1320px;
   opacity: 0.8;
   display: block; 
   margin: 0px auto;
 }
 
 .text_banner {
-  color: black;
+  color: white;
   font-size: 40px;
-  text-align: center;
+  text-align: right;
 	position: absolute;
-	top: 50%;
-	left: 50%;
-  transform: translate( -50%, -50% );
+	top: 40px;
+  right: 10%;
+  transform: translate( -10%, -10% );
+}
+.img_bg {
+  height: 290px;
+  min-width: 1720px;
+  /* clip: rect( 220px, 0px, 0px, 20px ); */
 }
 
 a {
@@ -207,35 +222,7 @@ img {
 /* .useChrome{ display: none;
 
 } */
-/* .normal {
-    position: fixed;
-    display: block;
-    width: 70%;
-    height: 160px;
-    line-height: 160px;
-    color: aliceblue;
-    padding: 0;
-    top: 70px;
-    z-index: 11;
-    border-radius: 0;
-    border-width: 7px;
-    border-style: solid;
-    color: #fff;
 
-    font-size: 1.7rem;
-
-    padding: 0;
-
-    position: relative;
-    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
-    background-color: #ff5252 !important;
-
-    border-color: rgba(255, 20, 20, 0.12) !important;
-  }
-
-  .normal i {
-    color: aliceblue;
-  } */
 .nav {
   max-width: 100%;
   padding: 0 !important;

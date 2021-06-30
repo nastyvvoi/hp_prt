@@ -1,83 +1,27 @@
-<template> 
-  <div class="w-100">
-    <div class="back_area" style="height:100%">
-      <v-tabs v-if="offSetWidth!==''&& offSetWidth>800" grow color="black" dark icons-and-text>
-        <v-tab v-for="item in items" :key="item.name" ripple style="cursor:pointer;">
-          <span>
-            <i active :class="item.icon"></i>
-            {{item.name}}
-          </span>
-        </v-tab>
-        <v-tab-item v-for="item in items" :key="item.name">
-          <div class="mapContentWrapper">
-            <div class="col-lg-8 paddingzero">
-              <div class="map">
-                <iframe class="map" :src="item.src" frameborder="0"></iframe>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="contact">
-                <h2>{{item.name}}</h2>
-                <p>{{item.english}}</p>
-                <hr class="featurette-divider">
-                <div class="divider"/>
-                <i class="fa fa-map"> Address</i>
-                <p>{{item.address}}</p>
-                <i class="fa fa-phone"> Phone</i>
-                <p>{{item.phone}}</p>
-                <i class="fa fa-envelope"> E-mail</i>
-                <p>support@email.com</p>
-                <i class="fa fa-fax"> Fax</i>
-                <p>{{item.fax}}</p>
-                <i class="fa fa-comment"> Kakao Talk</i>
-                <p>주식회사 **</p>
-              </div>
-            </div>
-          </div>
-        </v-tab-item>
-      </v-tabs>
-      <v-expansion-panel v-if="offSetWidth!==''&& offSetWidth<800" dark>
-        <v-expansion-panel-content v-for="item in items" :key="item.name">
-          <template v-slot:header>
-            <div>
-              <span>
-                <i active :class="item.icon"></i>
-                {{item.name}}
-              </span>
-            </div>
-          </template>
-            <div class="mapContentWrapper">
-            <div class="col-lg-8 paddingzero">
-              <div class="map">
-                <iframe class="map" :src="item.src" frameborder="0"></iframe>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="contact">
-                <h2>{{item.name}}</h2>
-                <p>{{item.english}}</p>
-                <hr class="featurette-divider">
-                <div class="divider"/>
-                <i class="fa fa-map"> Address</i>
-                <p>{{item.address}}</p>
-                <i class="fa fa-phone"> Phone</i>
-                <p>{{item.phone}}</p>
-                <i class="fa fa-envelope"> E-mail</i>
-                <p>support@thegarage.kr</p>
-                <i class="fa fa-fax"> Fax</i>
-                <p>{{item.fax}}</p>
-                <i class="fa fa-comment"> Kakao Talk</i>
-                <p>@GARAGE</p>
-              </div>
-            </div>
-          </div>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+<template>
+    <div class="container">
+        <div class="title">
+            <p>
+                오시는 길 | Location
+            </p>
+            <hr/>
+        </div>
+        <div class="rough_map">
+            <br>
+            <img src="~assets/image/rough_map.jpeg"/>
+        </div>
+        <div class="address">
+            <br>
+            <p>
+                ◎ 주소 및 연락처
+            </p>
+        </div>
+        <div class="address_detail">
+            <p>
+                경남 함안군 법수면 장백로 528-8. (주)일신 / Tel: 055-585-0686 / Fax: 055-585-0803
+            </p>
+        </div>
     </div>
-    <!-- </section> -->
-
-</div>
-
 </template>
 
 <script>
@@ -115,84 +59,32 @@
   }
 </script>
 <style scoped>
-.v-tabs__slider {
-  height: 4px;
+
+.container {
+    width: 100%;
+    margin: auto;
 }
 
-.v-tabs__div {
-  width: auto;
-  font-size: 20px;
-}
-.back_area {
-  background-color: #2ebd7f;
-}
-.mapContentWrapper {
-  display: flex;
-}
-@media (max-width: 992px) {
-  .mapContentWrapper {
-    display: block;
-  }
-}
-.loactionBanner {
-  width: 100%;
-  height: 250px;
-  /* background: url("~/assets/photo/membership.jpg") no-repeat fixed; */
-  background-size: cover;
-
-  background-position: center;
-
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-.loactionBanner:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: block;
-  z-index: -1;
+.title {
+    font-size: 40px;
+    font-weight: 500;
+    padding-top: 40px;
 }
 
-.loactionBanner h2 {
-
-  letter-spacing: 0.7REM;
-  color: #fff;
-  font-family: 'Fjalla One', sans-serif;
-  font-SIZE: 50px;
-  text-transform: uppercase;
-
-  padding-top:120px;
-
+.hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 2px solid #5c5c5c;
 }
 
-.loactionBanner h2:after {
-  content: "";
-  position: absolute;
-  background: #2ebd7f;
-  height: 5px;
-  width: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 20%;
+.address {
+    font-size: 26px;
+    font-weight: 500;
 }
 
-@media (max-width: 514px) { 
-  .loactionBanner h2:after {
-    display: none
-  }
-  .loactionBanner h2 {
-    letter-spacing: 0.7REM;
-    color: #fff;
-    font-family: 'Fjalla One', sans-serif;
-    font-SIZE: 50px;
-    text-transform: uppercase;
-    padding-top: 100px;
-  }
+.address_detail {
+    font-size: 18px;
+    margin-bottom: 50px;
 }
-
 </style>
