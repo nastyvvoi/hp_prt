@@ -25,6 +25,7 @@ export default {
     font-size: 40px;
     font-weight: 500;
     padding-top: 40px;
+    text-align: center;
 }
 
 .hr {

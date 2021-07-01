@@ -1,13 +1,12 @@
 <template>
     <div class="container">
-        <!-- <VerticalMenu/> -->
         <div class="title">
             <p>
                 회사소개 | About Company
             </p>
             <hr/>
         </div>
-        <div class="sub_title">
+        <!-- <div class="sub_title">
             <br>
             <p>
                  · 인사말
@@ -29,7 +28,7 @@
             <p>
                 저희 제품을 이용해주시는 고객분들에게 무한한 감사드리며 앞으로도 많은 관심과 성원 부탁드립니다.
             </p>
-        </div>
+        </div> -->
         <div class="history">
             <br>
             <p>
@@ -78,19 +77,13 @@
 </template>
 
 <script>
-import VerticalMenu from '../../components/VerticalMenu.vue';
-
-export default {
-  components: { VerticalMenu },
-
-}
 
 </script>
 
 <style scoped>
 .container {
     width: 100%;
-    /* margin: auto; */
+    margin: auto;
 }
 
 .title {
