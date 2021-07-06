@@ -14,6 +14,7 @@
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 
+
 export default {
   data() {
     return {
@@ -58,13 +59,13 @@ export default {
     window.removeEventListener("resize", this.isMobileMount);
   },
   components: {
-    Footer,
+    Footer, Navbar
   }
 };
 
 </script>
 
-<style>
+<style scoped>
 html {
   font-family:
     'Source Sans Pro',
@@ -103,6 +104,12 @@ body {
 .main {
   padding-top: 100px;
   /* height: 100% !important; */
+}
+
+.container {
+  /* float: left; */
+  padding-left: 100px !important;
+  max-width: 1385px;
 }
 
 .content-section {

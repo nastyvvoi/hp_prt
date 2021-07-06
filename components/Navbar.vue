@@ -28,10 +28,12 @@
           <img class="img_bg" src="~/assets/image/default_bg.png"/>
         </div>
       </div>
+      <vertical-menu class="vertical_menu"/>
     </div>
 </template>
 
 <script>
+import VerticalMenu from '~/components/VerticalMenu.vue';
 
 export default {
   data() {
@@ -100,6 +102,9 @@ export default {
       }
       // console.log(navigator.sayswho); // outputs: `Chrome 62`
       }
+  },
+  components: {
+    VerticalMenu
   },
 
   computed: {
@@ -231,4 +236,5 @@ img {
 #forclp {
   width: 100vw;
 }
+
 </style>

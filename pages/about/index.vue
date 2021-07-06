@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <!-- <VerticalMenu/> -->
+        <!-- <vertical-menu/> -->
         <div class="title">
             <p>
                 회사소개 | About Company
@@ -84,8 +84,12 @@
 import VerticalMenu from '../../components/VerticalMenu.vue';
 
 export default {
-  components: { VerticalMenu },
+    data() {
+        return {
 
+        }
+    },
+    components: { VerticalMenu },
 }
 
 </script>
