@@ -61,4 +61,16 @@ export default {
 	left: 50%;
 	transform: translate( -50%, -50% );
 }
+
+ul {
+    list-style: none;
+}
+
+a { 
+    text-decoration:none;
+}
+
+a:hover { 
+    text-decoration:none;
+}
 </style>
