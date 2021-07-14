@@ -16,7 +16,19 @@
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
-      <div class="banner_area">
+      <div v-if="!isMain" class="route_nav_area">
+        <div class="route_nav">
+          <p>
+            <span class="material-icons-outlined" style="color:#4375DB;vertical-align:middle;padding-right:10px">home</span>
+            <span class="route_text">Home</span>
+            <span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
+            <span class="route_text">{{firstTree}}</span>
+            <span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
+            <span class="route_text">{{secondTree}}</span>
+          </p>
+        </div>
+      </div>
+      <!-- <div class="banner_area">
         <div v-if="isMain">
           <img class="img_banner" src="~/assets/image/bg_main.jpeg"/>
           <div class="text_banner">
@@ -27,8 +39,8 @@
         <div v-else>
           <img class="img_bg" src="~/assets/image/default_bg.png"/>
         </div>
-      </div>
-      <vertical-menu class="vertical_menu"/>
+      </div> -->
+      <vertical-menu  v-if="!isMain" class="vertical_menu"/>
     </div>
 </template>
 
@@ -45,21 +57,19 @@ export default {
       scrolled: null,
       toggle: null,
       user: "",
-      windowWidth: null
+      windowWidth: null,
+      firstTree: "회사소개",
+      secondTree: "연혁",
     };
   },
   methods: {
     navClick() {
       var pathName = this.$route.path
-      // console.log(pathName)
+      console.log(pathName)
       if(pathName == "/"){
-        this.currentPage = "축적된 노하우로 최상의 제품을 공급합니다"
-        this.since = "since 2013"
         this.isMain = true
       }
       else {
-        this.currentPage = ""
-        this.since = ""
         this.isMain = false
       }
     },
@@ -223,6 +233,22 @@ img {
   }
 }
 
+.route_nav_area {
+  height: 60px;
+  border-top: 1px solid #9c9c9c;
+  background-color: #eeeeee;
+}
+
+.route_nav {
+  text-align: right;
+  line-height:60px;
+  vertical-align: middle;
+  margin-right: 200px;
+}
+
+.route_text {
+  color: #5c5c5c;
+}
 
 /* .useChrome{ display: none;
 
