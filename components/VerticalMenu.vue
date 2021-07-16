@@ -3,13 +3,13 @@
         <div class="vertical_banner">
             <img class="bg_img_area" src="~assets/image/temp_bg.png"/>
             <div class="bg_img_text">
-                <p style="margin-bottom:0">{{currentPage}}</p>
+                <p style="margin-bottom:0">{{currentPage.name}}</p>
             </div>
         </div>
         <div>
             <ul>
                 <li v-for="item in itemList">
-                    <a href="#">{{item}}</a>
+                    <nuxt-link class="child-link-area" :to="currentPage.route + item.route">{{item.name}}</nuxt-link>
                 </li>
             </ul>
         </div>
@@ -21,10 +21,15 @@
 export default {
     data() {
         return {
-            currentPage: "회사소개",
-            itemList: ["연혁", "조직도", "인사말"]
+            // currentPage: { name: "회사소개", route: '/about'},
+            // itemList: [
+            //     { name: '인사말', route: '/company'},
+            //     { name: '연혁', route: '/history'},
+            //     { name: '조직도', route: '/organization'},
+            // ]
         }
-    }
+    },
+    props: [ 'currentPage', 'itemList']
 }
 
 </script>
@@ -68,6 +73,10 @@ ul {
 
 a { 
     text-decoration:none;
+}
+
+.child-link-area {
+
 }
 
 a:hover { 

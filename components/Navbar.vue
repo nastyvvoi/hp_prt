@@ -9,7 +9,7 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto menu_group">
-            <b-nav-item to="/about" @click="navClick">회사소개</b-nav-item>
+            <b-nav-item to="/about/company" @click="navClick">회사소개</b-nav-item>
             <b-nav-item to="/product" @click="navClick">제품소개</b-nav-item>
             <b-nav-item to="/notice" @click="navClick">공지사항</b-nav-item>
             <b-nav-item to="/location" @click="navClick">오시는길</b-nav-item>
@@ -22,7 +22,7 @@
             <span class="material-icons-outlined" style="color:#4375DB;vertical-align:middle;padding-right:10px">home</span>
             <span class="route_text">Home</span>
             <span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
-            <span class="route_text">{{firstTree}}</span>
+            <span class="route_text">{{currentPage.name}}</span>
             <span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
             <span class="route_text">{{secondTree}}</span>
           </p>
@@ -40,7 +40,7 @@
           <img class="img_bg" src="~/assets/image/default_bg.png"/>
         </div>
       </div> -->
-      <vertical-menu  v-if="!isMain" class="vertical_menu"/>
+      <vertical-menu v-if="!isMain" :currentPage="currentPage" :itemList="itemList" class="vertical_menu"/>
     </div>
 </template>
 
@@ -50,7 +50,8 @@ import VerticalMenu from '~/components/VerticalMenu.vue';
 export default {
   data() {
     return {
-      currentPage: "축적된 노하우로 최상의 제품을 공급합니다",
+      currentPage: {},
+      itemList: [],
       since: "since 2013",
       isMain: true,
       isie: true,
@@ -58,8 +59,7 @@ export default {
       toggle: null,
       user: "",
       windowWidth: null,
-      firstTree: "회사소개",
-      secondTree: "연혁",
+      secondTree: "수정중",
     };
   },
   methods: {
@@ -71,6 +71,29 @@ export default {
       }
       else {
         this.isMain = false
+      }
+      if(pathName.includes('about')){
+        this.currentPage = { name: '회사소개', route: '/about'}
+        this.itemList = [
+          { name: '인사말', route: '/company'},
+          { name: '연혁', route: '/history'},
+          { name: '조직도', route: '/organization'},
+        ]
+      } else if (pathName.includes('product')) {
+        this.currentPage = { name: '제품소개', route: '/product'}
+        this.itemList = [
+          { name: '제품소개', route: ''},
+        ]
+      } else if (pathName.includes('notice')) {
+        this.currentPage = { name: '공지사항', route: '/notice'}
+        this.itemList = [
+          { name: '게시판', route: ''},
+        ]
+      } else if (pathName.includes('location')) {
+        this.currentPage = { name: '오시는길', route: '/location'}
+        this.itemList = [
+          { name: '오시는길', route: ''},
+        ]
       }
     },
     onresize() {
