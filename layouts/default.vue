@@ -108,7 +108,7 @@ body {
 
 .container {
   /* float: left; */
-  padding-left: 100px !important;
+  /* padding-left: 100px !important; */
   max-width: 1385px;
 }
 

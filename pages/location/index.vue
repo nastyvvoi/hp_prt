@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+      <div style="padding-left:200px">
         <div class="title">
             <p>
                 오시는 길 | Location
@@ -54,6 +55,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1공장) 경남 함안군 법수면 장백로 528-58
             </p>
         </div> -->
+      </div>
     </div>
 </template>
 

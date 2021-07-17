@@ -1,10 +1,12 @@
 <template>
     <div class="container">
+        <div style="padding-left:200px">
         <div class="title">
             <p>
                 공지사항 | Notice
             </p>
             <hr/>
+        </div>
         </div>
     </div>
 </template>

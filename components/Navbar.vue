@@ -20,9 +20,11 @@
         <div class="route_nav">
           <p>
             <span class="material-icons-outlined" style="color:#4375DB;vertical-align:middle;padding-right:10px">home</span>
-            <span class="route_text">Home</span>
+            <!-- <span class="route_text">Home</span> -->
+            <a class="route_text" href="/" @click="navClick">home</a>
             <span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
-            <span class="route_text">{{currentPage.name}}</span>
+            <!-- <span class="route_text">{{currentPage.name}}</span> -->
+            <nuxt-link class="route_text" :to="currentPage.route" @click="navClick">{{currentPage.name}}</nuxt-link>
             <span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
             <span class="route_text">{{secondTree}}</span>
           </p>

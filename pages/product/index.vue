@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <div style="padding-left:200px">
         <div class="title">
             <p>
                 제품소개 | Product
@@ -44,6 +45,7 @@
                     </b-col>
                 </b-row>
             </b-container>
+        </div>
         </div>
     </div>
 </template>

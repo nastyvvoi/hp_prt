@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <div style="padding-left:200px">
         <div class="title">
             <p>
                 회사소개 | About Company
@@ -13,6 +14,7 @@
             </p>
         </div>
             <img class="history_img" src="~assets/image/history.jpeg"/>
+        </div>
         </div>
     </div>
 </template>
