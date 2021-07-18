@@ -110,6 +110,7 @@ body {
   /* float: left; */
   /* padding-left: 100px !important; */
   max-width: 1385px;
+  margin: 0px auto;
 }
 
 .content-section {
