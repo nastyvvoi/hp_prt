@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div style="padding-left:200px">
+        <div style="padding-left:140px">
         <div class="title">
             <p>
                 회사소개 | About Company
@@ -50,7 +50,7 @@
 }
 
 .history_img {
-    width: 980px;
+    width: 905px;
     height: auto;
 }
 

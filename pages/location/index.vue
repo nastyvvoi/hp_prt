@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <div style="padding-left:200px">
+      <div style="padding-left:140px">
         <div class="title">
             <p>
                 오시는 길 | Location
@@ -18,13 +18,13 @@
           <div class="address_area">
             <hr class="thick_red"/>
             <p style="font-size:22px">
-              본사 / 1공장
+              본사(2공장) / 1공장
             </p>
             <p class="info_detail" style="margin:0px">
-              본 &nbsp;사: 경남 함안군 법수면 장백로 528-58
+              본 &nbsp;사(2공장): 경남 함안군 법수면 장백로 528-8
             </p>
             <p class="info_detail">
-              1공장: 경남 함안군 법수면 장백로 528-8
+              1공장: 경남 함안군 법수면 장백로 528-58
             </p>
           </div>
           <div class="divider"></div>

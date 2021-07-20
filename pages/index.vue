@@ -2,22 +2,106 @@
     <div class="container">
         <div class="main_area">
             <div class="left_area">
+                <div class="outer_box">
+                    <div class="inner_box">
+                        <div class="inner_box_text box_title_area">
+                            <p>회사소개</p>
+                        </div>
+                        <div class="box_content_area">
+                            <div class="inner_box_text" style="margin-left:10px">
+                                <p>공조기용 Condenser Ass'y</p>
+                                <p style="padding-top:24px">(A/C 냉장고)를 생산하는</p>
+                                <p style="padding-top:48px">전문업체입니다.</p>
+                            </div>
+                            <div class="inner_box_content_img_area about_img">
+                                <img class="inner_box_content_img" src="~assets/image/main_intro.jpeg"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer_box">
+                    <div class="inner_box">
+                        <div class="inner_box_text box_title_area">
+                            <p>제품소개</p>
+                        </div>
+                        <div class="box_content_area">
+                             <div class="inner_box_content_img_area product_img">
+                                <img class="inner_box_content_img" src="~assets/image/main_product.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer_box">
+                    <div class="inner_box">
+                        <div class="inner_box_text box_title_area">
+                            <p>문의</p>
+                        </div>
+                        <div class="box_content_area">
+                            <div class="inner_box_text phone_num" style="margin-left:10px">
+                                <p><span class="material-icons-outlined phone_num_icon">phone_in_talk</span>055-585-0686</p>
+                            </div>
+                            <div class="inner_box_text op_time" style="margin-left:10px">
+                                <p>평일 : 08:30 ~ 17:30 </p>
+                                <p style="padding-top:24px">점심 : 12:30 ~ 13:30</p>
+                            </div>
+                            <div class="location_btn_area" style="margin-left:10px">
+                                <button class="location_btn">
+                                    오시는 길<span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="center_area">
                 <v-carousel class="center_carousel">
-                    <v-carousel-item v-for="i in 3" :key="i">
+                    <v-carousel-item class="carousel_items" v-for="i in 3" :key="i">
                         <img src="~assets/image/main_carousel1.jpeg">
-                        <!-- <v-sheet>
-                            <v-row>
-                            <div class="text-h2">
-                                Slide {{ i + 1 }}
-                            </div>
-                            </v-row>
-                        </v-sheet> -->
+                        <div class="carousel_text">
+                            <p>축적된 노하우,</p>
+                            <p>완벽한 품질을 추구하는 기업!</p>
+                        </div>
                     </v-carousel-item>
                 </v-carousel>
             </div>
             <div class="right_area">
+                <div class="outer_box">
+                    <div class="inner_box">
+                        <div class="inner_box_text box_title_area">
+                            <p>회사연혁</p>
+                        </div>
+                        <div class="box_content_area">
+                            <div class="inner_box_text" style="margin-left:10px">
+                                <p>열정으로 한계에 도전하고</p>
+                                <p style="padding-top:24px">신뢰할 수 있는 기업이 되겠습니다.</p>
+                            </div>
+                            <div class="inner_box_content_img_area history_img">
+                                <img class="inner_box_content_img" src="~assets/image/main_history.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="outer_box">
+                    <div class="inner_box">
+                        <div class="inner_box_text box_title_area">
+                            <p>공지사항</p>
+                        </div>
+                        <div class="box_content_area">
+                        </div>
+                    </div>
+                </div>
+                <div class="outer_box">
+                    <div class="inner_box">
+                        <div class="inner_box_text box_title_area">
+                            <p>공장</p>
+                        </div>
+                        <div class="box_content_area">
+                            <div class="inner_box_content_img_area factory_img_area">
+                                <img class="inner_box_content_img" src="~assets/image/bg_main.jpeg"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- <b-container class="about_container">
@@ -79,32 +163,36 @@ export default {
 <style>
 .main_area {
     width: 1280px;
-    /* display: inline-block; */
-}
-
-.left_area {
-    width: 260px;
-    height: 800px;
-    background-color: blue;
     display: inline-block;
+    text-align: center;
 }
 
 .center_area {
     width: 600px;
-    /* height: 800px; */
-    background-color: red;
+    height: 806px;
     display: inline-block;
-}
-
-.right_area {
-    width: 260px;
-    height: 800px;
-    background-color: blue;
-    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .center_carousel {
-    height: 800px !important;
+    width: 600px;
+    height: 806px !important;
+}
+
+.carousel_items {
+    width: 600px;
+    height: 806px;
+    position: relative;
+}
+
+.carousel_items img{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
 }
 
 .v-window__prev, .v-window__next {
@@ -127,19 +215,134 @@ export default {
 }
 
 .v-carousel__item {
-    height: 800px !important;
+    height: 806px !important;
 }
 
-.about_row {
-    heigh: 350px;
-    align: center;
+.carousel_text {
+    position:absolute;
+	top:60px;
+	left:60px;
+    z-index: 2;
+    text-align: left;
 }
 
-.img_box {
-    height: 150px;
-    width: 150px;
-    border-radius: 70%;
-    overflow: hidden;
+.carousel_text p {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 0px;
+}
+
+.v-carousel__controls {
+    display: none !important;
+}
+
+.left_area, .right_area {
+    width: 264px;
+    height: 806px;
     display: inline-block;
 }
+
+.outer_box {
+    width: 264px;
+    height: 264px;
+    margin-bottom: 10px;
+    border: 2px solid #9c9c9c;
+}
+
+.inner_box {
+    width: 240px;
+    height: 240px;
+    margin: 10px;
+}
+
+.box_title_area {
+    width: 230px;
+    height: 40px;
+    font-size: 26px;
+    margin-left: 10px;
+}
+
+.inner_box_text p {
+    position: absolute;
+}
+
+.phone_num {
+    top: 30px;
+    width: 240px;
+    height: 40px;
+    position: absolute;
+}
+.phone_num_icon {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    vertical-align:middle;
+}
+.phone_num p{
+    font-size: 24px;
+    font-weight: 1000;
+}
+.op_time {
+    top: 80px;
+    width: 240px;
+    height: 48px;
+    padding-left: 30px;
+    position: absolute;
+}
+.location_btn_area {
+    top: 150px;
+    width: 240px;
+    height: 30px;
+    position: absolute;
+    margin-left: 0px !important;
+}
+.location_btn {
+    display: inline-block;
+    width: 230px;
+    height: 40px;
+    border: 2px solid #a6a6a6;
+    background-color: #eaeaea;
+}
+.box_content_area {
+    width: 240px;
+    height: 200px;
+    position: relative;
+}
+
+.inner_box_content_img_area {
+    position: relative;
+}
+
+.about_img {
+    width: 240px;
+    height: 110px;
+    top: 90px;
+}
+
+.product_img {
+    width: 240px;
+    height: 200px;
+}
+
+.history_img {
+    width: 240px;
+    height: 130px;
+    top: 70px;
+}
+
+.factory_img_area {
+    width: 240px;
+    height: 140px;
+    top: 30px;
+}
+
+.inner_box_content_img {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div style="padding-left:200px">
+        <div style="padding-left:140px">
         <div class="title">
             <p>
                 공지사항 | Notice
