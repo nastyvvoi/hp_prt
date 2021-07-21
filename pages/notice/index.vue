@@ -1,12 +1,18 @@
 <template>
     <div class="container">
         <div style="padding-left:140px">
-        <div class="title">
-            <p>
-                공지사항 | Notice
-            </p>
-            <hr/>
-        </div>
+            <div class="title">
+                <p>
+                    공지사항 | Notice
+                </p>
+                <hr/>
+            </div>
+            <div class="content_area">
+                <select name="제목">
+                    <option value="1">제목</option>
+                    <option value="2">내용</option>
+                </select>
+            </div>
         </div>
     </div>
 </template>

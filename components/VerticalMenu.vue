@@ -1,10 +1,12 @@
 <template>
     <div class="vertical_menu">
         <div class="vertical_banner">
-            <img class="bg_img_area" src="~assets/image/temp_bg.png"/>
-            <div class="bg_img_text">
-                <!-- <p style="margin-bottom:0">{{currentPage.name}}</p> -->
+            <div class="vertical_banner_inner_box">
                 <nuxt-link class="parent-link-area" :to="currentPage.route">{{currentPage.name}}</nuxt-link>
+                <!-- <img class="bg_img_area" src="~assets/image/temp_bg.png"/>
+                <div class="bg_img_text">
+                    <nuxt-link class="parent-link-area" :to="currentPage.route">{{currentPage.name}}</nuxt-link>
+                </div> -->
             </div>
         </div>
         <div>
@@ -49,11 +51,23 @@ export default {
 
 .vertical_banner {
     width: 160px;
+    height: 160px;
 	/* border: 1px solid #000000; */
 	position: relative;
 }
 
-.bg_img_area {
+.vertical_banner_inner_box {
+    width: 156px;
+    height: 156px;
+    margin: 2px;
+    border-radius: 5%;
+    border: 2px solid #a6a6a6;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+/* .bg_img_area {
     width: 100%;
 	vertical-align: middle;
 }
@@ -64,11 +78,10 @@ export default {
     padding: 5px 10px;
 	text-align: center;
 	position: absolute;
-    /* margin-bottom: 0 !important; */
 	top: 50%;
 	left: 50%;
 	transform: translate( -50%, -50% );
-}
+} */
 
 ul {
     list-style: none;
