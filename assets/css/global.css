@@ -11,8 +11,12 @@
   font-family: 'haru';
     src: url('../font/haru_medium.ttf') format('truetype');
 }
+html {
+  min-height: 100%;
+}
 body {
   min-width: 100%;
+  min-height: 100%;
   font-family: 'haru';
 }
 

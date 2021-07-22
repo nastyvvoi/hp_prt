@@ -2,7 +2,7 @@
     <div class="container">
         <div class="main_area">
             <div class="left_area">
-                <div class="outer_box">
+                <div class="outer_box" @click="onClickOuterBox">
                     <div class="inner_box">
                         <div class="inner_box_text box_title_area">
                             <p>회사소개</p>
@@ -156,6 +156,11 @@ export default {
         return {
             model: 0,
         }
+    },
+    methods: {
+        onClickOuterBox() {
+            console.log("@@@@")
+        }
     }
 }
 </script>
@@ -247,6 +252,7 @@ export default {
     height: 264px;
     margin-bottom: 10px;
     border: 2px solid #9c9c9c;
+    cursor: pointer;
 }
 
 .inner_box {

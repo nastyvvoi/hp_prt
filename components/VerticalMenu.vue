@@ -1,7 +1,7 @@
 <template>
     <div class="vertical_menu">
         <div class="vertical_banner">
-            <div class="vertical_banner_inner_box">
+            <div class="vertical_banner_inner_box" @click="onClickVerticalBannerBox">
                 <nuxt-link class="parent-link-area" :to="currentPage.route">{{currentPage.name}}</nuxt-link>
                 <!-- <img class="bg_img_area" src="~assets/image/temp_bg.png"/>
                 <div class="bg_img_text">
@@ -34,7 +34,12 @@ export default {
             // ]
         }
     },
-    props: [ 'currentPage', 'itemList']
+    props: [ 'currentPage', 'itemList'],
+    methods: {
+        onClickVerticalBannerBox() {
+            console.log("###")
+        }
+    }
 }
 
 </script>
@@ -64,6 +69,7 @@ export default {
     border: 2px solid #a6a6a6;
     text-align: center;
     vertical-align: middle;
+    cursor: pointer;
 }
 
 
@@ -92,8 +98,12 @@ ul {
 a { 
     text-decoration:none;
 }
+
 .parent-link-area {
-    margin-bottom:0
+    margin-bottom:0;
+    line-height: 160px;
+    font-size: 24px;
+    color: #7a7a7a;
 }
 
 .child-link-area {
