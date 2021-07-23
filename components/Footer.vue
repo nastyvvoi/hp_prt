@@ -6,19 +6,30 @@
         <img src="~assets/image/Logo_bg_trans.png" style="height:80px;width:253px"/>
       </div>
       <div class="info_area">
-        <p class="info_text">
+        <p>
+          <span class="info_text_span">(주)일신</span>
+          <span class="info_text_span left_border_span">대표이사 배종호</span>
+          <span class="info_text_span left_border_span">TEL : 055-585-0686</span>
+          <span class="info_text_span left_border_span">FAX : 055-585-0803</span>
+        </p>
+        <p>
+          <span class="info_text_span">사업자등록번호 : 859-88-00133</span>
+          <span class="info_text_span left_border_span">Email : ilshincorp13@naver.com</span>
+        </p>
+        <p>
+          <span class="info_text_span">소재지 : 본사(2공장) : 경남 함안군 법수면 장백로 528-8 (주)일신</span>
+          <br>
+          <span class="info_text_span" style="padding-left:101px">(1공장) : 경남 함안군 법수면 장백로 528-58</span>
+        </p>
+        <p>
+          <span class="info_text_span">COPYRIGHTⓒ {{this.getFullYear}} ilshin Corp. All Rights Reserved.</span>
+        </p>
+        
+        <!-- <p class="info_text">
           <span class="info_row">
-            <strong class="strong_text">
-              (주) 일신
-            </strong>
-            <strong class="strong_text">
-              대표
-            </strong>
-              배종호
-            <strong class="strong_text">
-              사업자 등록번호
-            </strong>
-              859-88-00133
+            <strong class="strong_text">(주) 일신</strong>
+            <strong class="strong_text">대표</strong>배종호
+            <strong class="strong_text">사업자 등록번호</strong>859-88-00133
           </span>
           <br>
           <span class="info_row">
@@ -50,12 +61,7 @@
             </strong>
               All Rights Reserved.
           </span>
-        </p>
-        <!-- <div class="footer-phone row justify-content-center">
-          <div class="col-md-6">
-            <span>전화 문의: 9시-18시</span>
-          </div>
-        </div> -->
+        </p> -->
       </div>
     </div>
   </footer>
@@ -100,7 +106,7 @@ hr {
 
 .footer {
   /* flex-shrink: 0; */
-  height: 190px;
+  height: 220px;
   background-color: #f6f6f6;
   color: #777777;
   position: relative;
@@ -108,7 +114,7 @@ hr {
 
 .info {
   padding-top: 30px;
-  padding-left:150px;
+  padding-left:100px;
 }
 
 .logo_area {
@@ -119,7 +125,7 @@ hr {
 }
 
 .info_area {
-  padding-left: 200px;
+  padding-left: 120px;
   float: left;
 }
 
@@ -138,6 +144,16 @@ hr {
   margin-left: 30px;
   margin-right: 15px;
 }
+
+.info_text_span {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.left_border_span {
+  border-left: 2px solid #777777;
+}
+
 
 .talk_banner_div {
   margin: 0px !important;
