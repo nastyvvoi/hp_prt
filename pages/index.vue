@@ -2,7 +2,7 @@
     <div class="container">
         <div class="main_area">
             <div class="left_area">
-                <div class="outer_box" @click="onClickOuterBox">
+                <div class="outer_box" @click="onClickOuterBox('/about/company')">
                     <div class="inner_box">
                         <div class="inner_box_text box_title_area">
                             <p>회사소개</p>
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="outer_box">
+                <div class="outer_box" @click="onClickOuterBox('/product')">
                     <div class="inner_box">
                         <div class="inner_box_text box_title_area">
                             <p>제품소개</p>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="outer_box">
+                <div class="outer_box" @click="onClickOuterBox('/location')">
                     <div class="inner_box">
                         <div class="inner_box_text box_title_area">
                             <p>문의</p>
@@ -65,7 +65,7 @@
                 </v-carousel>
             </div>
             <div class="right_area">
-                <div class="outer_box">
+                <div class="outer_box" @click="onClickOuterBox('/about/history')">
                     <div class="inner_box">
                         <div class="inner_box_text box_title_area">
                             <p>회사연혁</p>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="outer_box">
+                <div class="outer_box" @click="onClickOuterBox('/notice')">
                     <div class="inner_box">
                         <div class="inner_box_text box_title_area">
                             <p>공지사항</p>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="outer_box">
+                <div class="outer_box" @click="onClickOuterBox('/location')">
                     <div class="inner_box">
                         <div class="inner_box_text box_title_area">
                             <p>공장</p>
@@ -158,8 +158,50 @@ export default {
         }
     },
     methods: {
-        onClickOuterBox() {
-            console.log("@@@@")
+        onClickOuterBox(path) {
+            var pathName = path
+            if(pathName == "/"){
+                this.$store.commit("setIsMain", true)
+                this.$store.commit('setCurrentPage', { name: '', route: '/'})
+                this.$store.commit('setItemList', [])
+            }
+            else {
+                this.$store.commit("setIsMain", false)
+            }
+            if(pathName.includes('about')){
+                this.$store.commit('setCurrentPage', { name: '회사소개', route: '/about'})
+                this.$store.commit('setItemList', [
+                { name: '인사말', route: '/company'},
+                { name: '연혁', route: '/history'},
+                { name: '조직도', route: '/organization'},
+                ])
+                if(pathName.includes('history')){
+                    this.$store.commit('setSecondRoute', '연혁')
+                } else if (pathName.includes('organization')) {
+                    this.$store.commit('setSecondRoute', '조직도')
+                } else {
+                    this.$store.commit('setSecondRoute', '인사말')
+                }
+            } else if (pathName.includes('product')) {
+                this.$store.commit('setCurrentPage', { name: '제품소개', route: '/product'})
+                this.$store.commit('setItemList', [
+                { name: '제품소개', route: ''},
+                ])
+                this.$store.commit('setSecondRoute', '제품소개')
+            } else if (pathName.includes('notice')) {
+                this.$store.commit('setCurrentPage', { name: '공지사항', route: '/notice'})
+                this.$store.commit('setItemList', [
+                { name: '게시판', route: ''},
+                ])
+                this.$store.commit('setSecondRoute', '게시판')
+            } else if (pathName.includes('location')) {
+                this.$store.commit('setCurrentPage', { name: '오시는길', route: '/location'})
+                this.$store.commit('setItemList', [
+                { name: '오시는길', route: ''},
+                ])
+                this.$store.commit('setSecondRoute', '오시는길')
+            }
+            this.$router.push(pathName)
         }
     }
 }

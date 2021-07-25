@@ -1,7 +1,7 @@
 <template>
     <div class="vertical_menu">
         <div class="vertical_banner">
-            <div class="vertical_banner_inner_box" @click="onClickVerticalBannerBox">
+            <div class="vertical_banner_inner_box" @click="onClickVerticalNav(currentPage.route)">
                 <nuxt-link class="parent-link-area" :to="currentPage.route">{{currentPage.name}}</nuxt-link>
                 <!-- <img class="bg_img_area" src="~assets/image/temp_bg.png"/>
                 <div class="bg_img_text">
@@ -11,9 +11,9 @@
         </div>
         <div>
             <ul>
-                <li class="child-link-area" v-for="item in itemList">
+                <li class="child-link-area" v-for="item in this.$store.state.itemList">
                     <nuxt-link :to="currentPage.route + item.route">
-                        <button class="button-link-area">{{item.name}}</button>
+                        <button  @click="onClickVerticalNav(item.route)" class="button-link-area">{{item.name}}</button>
                     </nuxt-link>
                 </li>
             </ul>
@@ -36,8 +36,25 @@ export default {
     },
     props: [ 'currentPage', 'itemList'],
     methods: {
-        onClickVerticalBannerBox() {
-            console.log("###")
+        onClickVerticalNav(path) {
+            var pathName = path
+            if(pathName == '') {
+                pathName = this.$route.path
+            }
+            if(pathName.includes('history')){
+                this.$store.commit('setSecondRoute', '연혁')
+            } else if (pathName.includes('organization')) {
+                this.$store.commit('setSecondRoute', '조직도')
+            } else if (pathName.includes('product')) {
+                this.$store.commit('setSecondRoute', '제품소개')
+            } else if (pathName.includes('notice')) {
+                this.$store.commit('setSecondRoute', '게시판')
+            } else if (pathName.includes('location')) {
+                this.$store.commit('setSecondRoute', '오시는길')
+            } else {
+                this.$store.commit('setSecondRoute', '인사말')
+            }
+            
         }
     }
 }

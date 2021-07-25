@@ -44,6 +44,8 @@ export default {
       }
     }
   },
+  created() {
+  },
   mounted() {
     this.styleobject["min-height"] = window.innerHeight - 327 + "px";
   },

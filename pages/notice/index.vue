@@ -24,13 +24,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td class="title"><span>샘플 데이터--- 게시글 제목 -------------</span></td>
+                            <tr v-for="(n,index) in 10">
+                                <th scope="row">{{n}}</th>
+                                <td class="title"><span @click="onClickNotice">샘플 데이터--- 게시글 제목 -------------</span></td>
                                 <td class="date">test</td>
                                 <td class="writer">test</td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <th scope="row">2</th>
                                 <td class="title"><span>샘플 데이터</span></td>
                                 <td class="date">test</td>
@@ -41,9 +41,14 @@
                                 <td class="title"><span>샘플 데이터</span></td>
                                 <td class="date">test</td>
                                 <td class="writer">test</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
+                    <pagination
+                      :rowCount="rowCount"
+                      :totalDataCount="totalDataCount"
+                      @get-current-page="getCurrentPage"
+                    />
                 </div>
             </div>
             <nuxt-child/>
@@ -52,8 +57,28 @@
 </template>
 
 <script>
-export default {
+import pagination from '~/components/Pagination.vue';
 
+export default {
+  data() {
+    return {
+      rowCount: 10,
+      totalDataCount:3,
+      currentPage: 1,
+    }
+  },
+  components: {
+    pagination
+  },
+  methods: {
+    onClickNotice() {
+      this.$router.push('/notice/board/1')
+      this.$store.commit('setSecondRoute', '게시판')
+    },
+    getCurrentPage(val){
+      this.currentPage = val
+    }
+  }
 }
 </script>
 
@@ -80,6 +105,7 @@ export default {
 .board_area {
     padding-top : 20px;
     min-height: 500px;
+    text-align: center;
 }
 
 table.board_content {

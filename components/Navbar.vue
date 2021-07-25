@@ -27,7 +27,7 @@
             <!-- <span class="route_text">{{currentPage.name}}</span> -->
             <nuxt-link class="route_text" :to="currentPage.route" @click="navClick">{{currentPage.name}}</nuxt-link>
             <span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
-            <span class="route_text">{{secondTree}}</span>
+            <span class="route_text">{{secondRoute}}</span>
           </p>
         </div>
       </div>
@@ -62,41 +62,52 @@ export default {
       toggle: null,
       user: "",
       windowWidth: null,
-      secondTree: "수정중",
+      secondRoute: "",
     };
   },
   methods: {
     navClick() {
       var pathName = this.$route.path
-      console.log(pathName)
       if(pathName == "/"){
-        this.isMain = true
+        this.$store.commit("setIsMain", true)
+        this.$store.commit('setCurrentPage', { name: '', route: '/'})
+        this.$store.commit('setItemList', [])
       }
       else {
-        this.isMain = false
+        this.$store.commit("setIsMain", false)
       }
       if(pathName.includes('about')){
-        this.currentPage = { name: '회사소개', route: '/about'}
-        this.itemList = [
+        this.$store.commit('setCurrentPage', { name: '회사소개', route: '/about'})
+        this.$store.commit('setItemList', [
           { name: '인사말', route: '/company'},
           { name: '연혁', route: '/history'},
           { name: '조직도', route: '/organization'},
-        ]
+        ])
+        if(pathName.includes('history')){
+          this.$store.commit('setSecondRoute', '연혁')
+        } else if (pathName.includes('organization')) {
+          this.$store.commit('setSecondRoute', '조직도')
+        } else {
+          this.$store.commit('setSecondRoute', '인사말')
+        }
       } else if (pathName.includes('product')) {
-        this.currentPage = { name: '제품소개', route: '/product'}
-        this.itemList = [
+        this.$store.commit('setCurrentPage', { name: '제품소개', route: '/product'})
+        this.$store.commit('setItemList', [
           { name: '제품소개', route: ''},
-        ]
+        ])
+        this.$store.commit('setSecondRoute', '제품소개')
       } else if (pathName.includes('notice')) {
-        this.currentPage = { name: '공지사항', route: '/notice'}
-        this.itemList = [
+        this.$store.commit('setCurrentPage', { name: '공지사항', route: '/notice'})
+        this.$store.commit('setItemList', [
           { name: '게시판', route: ''},
-        ]
+        ])
+        this.$store.commit('setSecondRoute', '게시판')
       } else if (pathName.includes('location')) {
-        this.currentPage = { name: '오시는길', route: '/location'}
-        this.itemList = [
+        this.$store.commit('setCurrentPage', { name: '오시는길', route: '/location'})
+        this.$store.commit('setItemList', [
           { name: '오시는길', route: ''},
-        ]
+        ])
+        this.$store.commit('setSecondRoute', '오시는길')
       }
     },
     onresize() {
@@ -142,15 +153,41 @@ export default {
   components: {
     VerticalMenu
   },
-
   computed: {
-
+    checkisMain() {
+      return this.$store.getters.isMain
+    },
+    checkCurrentPage() {
+      return this.$store.state.currentPage
+    },
+    checkSecondRoute() {
+      return this.$store.state.secondRoute
+    }
+  },
+  watch: {
+    checkisMain(val) {
+      console.log("val", val)
+      this.isMain = val
+    },
+    checkCurrentPage(val) {
+      this.currentPage = val
+    },
+    checkSecondRoute(val) {
+      this.secondRoute = val
+    }
   },
   beforeUpdate() {},
   created() {
-    this.navClick()
+    this.$nextTick(() => {
+      this.navClick()
+      this.isMain = this.$store.state.isMain
+      this.secondRoute = this.$store.state.secondRoute
+    })
   },
   beforeMount() {
+    // this.$nextTick(() => {
+    //   this.navClick()
+    // })
     // this.navClick()
     // this.browserCheck()
   },
