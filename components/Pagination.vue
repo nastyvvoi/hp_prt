@@ -19,8 +19,8 @@ export default {
     }
   },
   props: {
-    rowCount: { default: 10 },
-    pageCount: { default: 10 },
+    rowCount: { default: 0 },
+    pageCount: { default: 0 },
     totalDataCount: { default: 0},
     routeParamOption: { default: false }
   },
@@ -31,6 +31,7 @@ export default {
   },
   watch: {
     totalDataCount() {
+      console.log("totalDataCount")
       this.currentPage = 1
       this.totalPage = parseInt(this.totalDataCount / this.rowCount)
       if(this.totalDataCount % this.rowCount > 0)
@@ -40,6 +41,7 @@ export default {
     rowCount() {
       this.startPage = 1
       this.currentPage = 1
+      console.log("rowCount")
       this.totalPage = parseInt(this.totalDataCount / this.rowCount)
       if(this.totalDataCount % this.rowCount > 0)
         this.totalPage++;
@@ -59,8 +61,12 @@ export default {
         this.$router.push({query:{}})
     }
   },
+  created() {
+    this.setPageIndex()
+  },
   methods: {
     setPageIndex(){
+      console.log("setPageIndex")
       this.startPage = ((this.currentPage - 1) / this.pageCount) * this.pageCount + 1
       this.endPage = this.startPage + this.pageCount - 1
       if(this.endPage > this.totalPage)

@@ -8,14 +8,14 @@
                 <hr/>
             </div>
             <div class="board_area">
-                <news-form/>
+                <edit-form/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import newsForm from '~/components/NewsForm.vue';
+import editForm from '~/components/EditForm.vue';
 
 export default {
     data() {
@@ -24,9 +24,10 @@ export default {
         }
     },
     components: {
-        newsForm,
+        editForm,
     }
 }
+
 </script>
 
 <style scoped>
@@ -55,4 +56,3 @@ export default {
     text-align: center;
 }
 </style>
-

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="entity_wrapper">
         <table class="board_content">
             <thead>
                 <tr>
@@ -19,7 +19,7 @@
                 </tr>
             </tbody>
         </table>
-        <button  @click="onClickBoardList" class="button-board-list">목록</button>
+        <button @click="onClickBoardList" class="button-board-list">목록</button>
     </div>
 </template>
 
@@ -41,12 +41,15 @@ export default {
 </script>
 
 <style scoped>
+.entity_wrapper {
+    min-height: 500px;
+}
 table.board_content {
   border-collapse: collapse;
   text-align: left;
   line-height: 1.5;
   /* border: 1px solid #ccc; */
-  margin: 20px 10px;
+  margin: auto;
 }
 table.board_content thead {
   border-bottom: 1px solid #ccc;
@@ -91,9 +94,10 @@ table.board_content td.newsform_attach_area {
 	color:black;
 	font-family:Arial;
 	font-size:17px;
-	padding:7px 25px;
+	padding: 7px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #d5d5d5;
+    margin-top: 25px;
 }
 
 .button-board-list:hover {

@@ -12,7 +12,10 @@
                     <option value="1">제목</option>
                     <option value="2">내용</option>
                 </select> -->
-                <div class="board_area">
+                <div class="board_area"
+                  @create="onCreate"
+                  @update="onUpdate"
+                  @delete="onDelete">
                     <table class="board_content">
                         <thead>
                             <tr>
@@ -24,31 +27,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(n,index) in 10">
-                                <th scope="row">{{n}}</th>
-                                <td class="title"><span @click="onClickNotice">샘플 데이터--- 게시글 제목 -------------</span></td>
-                                <td class="date">test</td>
-                                <td class="writer">test</td>
+                            <tr v-for="(item, index) in this.pagingData" :key="index">
+                                <th scope="row">{{item.num}}</th>
+                                <td class="title"><span @click="onClickNotice">{{item.title}}</span></td>
+                                <td class="date">{{item.date}}</td>
+                                <td class="writer">{{item.writer}}</td>
                             </tr>
-                            <!-- <tr>
-                                <th scope="row">2</th>
-                                <td class="title"><span>샘플 데이터</span></td>
-                                <td class="date">test</td>
-                                <td class="writer">test</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td class="title"><span>샘플 데이터</span></td>
-                                <td class="date">test</td>
-                                <td class="writer">test</td>
-                            </tr> -->
                         </tbody>
                     </table>
-                    <pagination
+                    <!-- <pagination
                       :rowCount="rowCount"
                       :totalDataCount="totalDataCount"
+                      :pageCount="pageCount"
                       @get-current-page="getCurrentPage"
-                    />
+                    /> -->
+                    <div class="pagination">
+                      <a v-if="isPrev" @click="goPrev">&lt;</a>
+                      <a v-for="p in pages" :key="p" :class="[p == currentPage ? 'active' : '']" @click="onClickPage(p)">{{p}}</a>
+                      <a @click="goNext">&gt;</a>
+                    </div>
                 </div>
             </div>
             <nuxt-child/>
@@ -63,20 +60,153 @@ export default {
   data() {
     return {
       rowCount: 10,
-      totalDataCount:3,
+      totalDataCount: 0,
       currentPage: 1,
+      dataList: [],
+      pagingData: [],
+      totalPage: 0,
+      startPage: 0,
+      endPage: 0,
+      pageCount: 10,
+      // isPrev: false,
+      // isNext: false,
     }
   },
   components: {
     pagination
   },
+  computed: {
+    pages() {
+      console.log("############computed pages", this.endPage, this.startPage)
+      var arr = new Array(this.endPage - this.startPage + 1).fill(this.startPage).map((n, i) => n + i)
+      console.log("############computed pages", arr)
+      return arr
+    },
+    isPrev() {
+      if(this.currentPage - this.pageCount > 0) return true
+      return false
+    },
+    // isNext() {
+    //   if(this.currentPage + this.pageCount > this.totalPage) return false
+    //   return true
+    // }
+  },
+  watch: {
+    totalDataCount() {
+      console.log("############totalDataCount")
+      this.currentPage = 1
+      this.totalPage = parseInt(this.totalDataCount / this.rowCount)
+      if(this.totalDataCount % this.rowCount > 0)
+        this.totalPage++;
+      this.setPageIndex()
+    },
+    rowCount() {
+      this.startPage = 1
+      this.currentPage = 1
+      console.log("#######################rowCount")
+      this.totalPage = parseInt(this.totalDataCount / this.rowCount)
+      if(this.totalDataCount % this.rowCount > 0)
+        this.totalPage++;
+      this.endPage = this.startPage + this.pageCount - 1
+      if(this.endPage > this.totalPage)
+        this.endPage = this.totalPage
+    },
+    currentPage(val) {
+      console.log("@@@@@@@@@@@@@@@@@@watch currentpage", val)
+      if(val != 1)
+        this.currentPage = val
+      else
+        this.currentPage = 1
+
+      console.log(this.currentPage)
+    }
+  },
+  created() {
+    this.rowCount = 10
+    this.totalDataCount = 161
+    for(var i = 0; i < this.totalDataCount; i++){
+      var dataSet = {
+        num: i,
+        title: "글 제목 test test" + i,
+        content: "글 내용 ~~~" + i,
+        date: this.$moment(new Date()).format('YYYY-MM-DD'),
+        writer: "관리자"
+      }
+      this.dataList.unshift(dataSet)
+    }
+    this.paging()
+    this.setPageIndex()
+  },
   methods: {
+    setPageIndex(){
+      console.log("######################setPageIndex")
+      this.startPage = ((this.currentPage - 1) / this.pageCount) * this.pageCount + 1
+      this.endPage = this.startPage + this.pageCount - 1
+      if(this.endPage > this.totalPage)
+        this.endPage = this.totalPage
+    },
+    onClickPage(pageNum) {
+      console.log("@@@@@@@@@@@@onClickPage", pageNum)
+      this.currentPage = pageNum
+      this.paging()
+    },
+    goPrev() {
+      // 한 페이지씩 이동
+      // if(this.currentPage != this.startPage)
+      //   this.currentPage -= 1
+      // if(this.startPage == this.currentPage && this.startPage > 1){
+      //   this.currentPage -= 1
+      //   this.startPage -= this.pageCount
+      //   this.setPageIndex()
+      // }
+      this.currentPage = this.startPage - this.pageCount 
+      if(this.currentPage < 1)
+        this.currentPage = 1
+      this.setPageIndex()
+      this.paging()
+    },
+    goNext() {
+      // 한 페이지씩 이동
+      // if(this.endPage != this.currentPage)
+      //   this.currentPage += 1
+      // if(this.endPage == this.currentPage && this.endPage < this.totalPage){
+      //   this.currentPage += 1
+      //   this.startPage += this.pageCount
+      //   this.setPageIndex()
+      // }
+      if(this.currentPage + this.pageCount < this.totalPage){
+        this.currentPage = this.pageCount + this.startPage
+        this.setPageIndex()
+      } else if((this.currentPage + this.pageCount >= this.totalPage) && (this.endPage < this.totalPage)){
+        this.currentPage = this.endPage + 1
+        this.setPageIndex()
+      }
+      this.paging()
+    },
+    paging() {
+      const start = (this.currentPage - 1) * this.rowCount
+      const end = start + Number(this.rowCount)
+      this.pagingData = this.dataList.slice(start, end)
+      this.pagingData.sort((a, b) => {
+        return a.num > b.num ? -1 : a.num < b.num ? 1 : 0
+      })
+    },
     onClickNotice() {
-      this.$router.push('/notice/board/1')
+      this.$router.push('/notice/board')
       this.$store.commit('setSecondRoute', '게시판')
     },
     getCurrentPage(val){
+      console.log("getCurrentPage", val)
       this.currentPage = val
+    },
+    onCreate() {
+      console.log("onCreate")
+    },
+    onUpdate() {
+      console.log("onUpdate")
+    },
+    onDelete() {
+      console.log("onDelete")
     }
   }
 }
@@ -113,7 +243,7 @@ table.board_content {
   text-align: center;
   line-height: 1.5;
   /* border: 1px solid #ccc; */
-  margin: 20px 10px;
+  margin: auto;
 }
 table.board_content thead {
   border-bottom: 1px solid #ccc;
@@ -168,5 +298,30 @@ table.board_content td.writer {
   font-size: 16px;
 }
 
+
+.pagination {
+  display: inline-block !important;
+  margin-top: 20px;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #153d73;
+  color: white !important;
+  border: 1px solid #153d73;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
 </style>
 
