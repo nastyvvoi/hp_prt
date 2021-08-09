@@ -55,11 +55,11 @@
             </div>
             <div class="center_area">
                 <v-carousel class="center_carousel">
-                    <v-carousel-item class="carousel_items" v-for="i in 3" :key="i">
-                        <img src="~assets/image/main_carousel1.jpeg">
-                        <div class="carousel_text">
-                            <p>축적된 노하우,</p>
-                            <p>완벽한 품질을 추구하는 기업!</p>
+                    <v-carousel-item class="carousel_items" v-for="(item, index) in carouselData" :key='index'>
+                        <img :src='item.path'>
+                        <div :class="item.class">
+                            <p>{{item.text_1}}</p>
+                            <p>{{item.text_2}}</p>
                         </div>
                     </v-carousel-item>
                 </v-carousel>
@@ -155,6 +155,29 @@ export default {
     data () {
         return {
             model: 0,
+            carouselData: [
+                { 
+                    path: '/_nuxt/assets/image/main_carousel1.jpeg', 
+                    text_1: '축적된 노하우,', 
+                    text_2: '완벽한 품질을 추구하는 기업!',
+                    class: 'carousel_text carousel_text_white'
+                }, {
+                    path: '/_nuxt/assets/image/main_carousel2.png', 
+                    text_1: '주식회사 일신', 
+                    text_2: '홈페이지 방문을 환영합니다!',
+                    class: 'carousel_text carousel_text_black'
+                }, { 
+                    path: '/_nuxt/assets/image/main_carousel1.jpeg', 
+                    text_1: '축적된 노하우,', 
+                    text_2: '완벽한 품질을 추구하는 기업!',
+                    class: 'carousel_text carousel_text_white'
+                }, {
+                    path: '/_nuxt/assets/image/main_carousel2.png', 
+                    text_1: '주식회사 일신', 
+                    text_2: '홈페이지 방문을 환영합니다!',
+                    class: 'carousel_text carousel_text_black'
+                }
+            ]
         }
     },
     methods: {
@@ -185,9 +208,9 @@ export default {
             } else if (pathName.includes('product')) {
                 this.$store.commit('setCurrentPage', { name: '제품소개', route: '/product'})
                 this.$store.commit('setItemList', [
-                { name: '제품소개', route: ''},
+                { name: 'MFC 공정', route: ''},
                 ])
-                this.$store.commit('setSecondRoute', '제품소개')
+                this.$store.commit('setSecondRoute', 'MFC 공정')
             } else if (pathName.includes('notice')) {
                 this.$store.commit('setCurrentPage', { name: '공지사항', route: '/notice'})
                 this.$store.commit('setItemList', [
@@ -273,8 +296,14 @@ export default {
     text-align: left;
 }
 
-.carousel_text p {
+.carousel_text_white p {
     color: #fff;
+    font-size: 24px;
+    margin-bottom: 0px;
+}
+
+.carousel_text_black p {
+    color: #000;
     font-size: 24px;
     margin-bottom: 0px;
 }

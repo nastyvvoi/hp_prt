@@ -46,7 +46,7 @@ export default {
             } else if (pathName.includes('organization')) {
                 this.$store.commit('setSecondRoute', '조직도')
             } else if (pathName.includes('product')) {
-                this.$store.commit('setSecondRoute', '제품소개')
+                this.$store.commit('setSecondRoute', 'MFC 공정')
             } else if (pathName.includes('notice')) {
                 this.$store.commit('setSecondRoute', '게시판')
             } else if (pathName.includes('location')) {

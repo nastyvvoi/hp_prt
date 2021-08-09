@@ -93,9 +93,9 @@ export default {
       } else if (pathName.includes('product')) {
         this.$store.commit('setCurrentPage', { name: '제품소개', route: '/product'})
         this.$store.commit('setItemList', [
-          { name: '제품소개', route: ''},
+          { name: 'MFC 공정', route: ''},
         ])
-        this.$store.commit('setSecondRoute', '제품소개')
+        this.$store.commit('setSecondRoute', 'MFC 공정')
       } else if (pathName.includes('notice')) {
         this.$store.commit('setCurrentPage', { name: '공지사항', route: '/notice'})
         this.$store.commit('setItemList', [
