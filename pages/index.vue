@@ -104,75 +104,35 @@
                 </div>
             </div>
         </div>
-        <!-- <b-container class="about_container">
-            <b-row class="about_row text-center" align-v="center">
-                <b-col class="ml-md-auto">
-                    <div class="img_box">
-                        <img class="round_img" src="~/assets/image/company_thumb.png"/>
-                    </div>
-                    <div>
-                        <p>
-                            회사소개 | Company
-                        </p>
-                        <p>
-                          (주)일신은 Condenser 생산 전문업체입니다.
-                        </p>
-                    </div>
-                </b-col>
-                <b-col class="ml-md-auto">
-                    <div class="img_box">
-                        <img class="round_img" src="~/assets/image/product_thumb.jpg"/>
-                    </div>
-                    <p>
-                        제품소개 | Product
-                    </p>
-                </b-col>
-            </b-row>
-            <b-row class="about_row text-center" align-v="center">
-                <b-col class="ml-md-auto">
-                    <div class="img_box">
-                        <img class="round_img" src="~/assets/image/no_image.png"/>
-                    </div>
-                    <p>
-                        공지사항 | Notice
-                    </p>
-                </b-col>
-                <b-col class="ml-md-auto">
-                    <div class="img_box">
-                        <img class="round_img" src="~/assets/image/no_image.png"/>
-                    </div>
-                    <p>
-                        오시는길 | Location
-                    </p>
-                </b-col>
-            </b-row>
-        </b-container> -->
     </div>
 </template>
 
 <script>
+import carousel1 from '~/assets/image/main_carousel1.jpeg'
+import carousel2 from '~/assets/image/main_carousel2.png'
+
 export default {
     data () {
         return {
             model: 0,
             carouselData: [
                 { 
-                    path: '/_nuxt/assets/image/main_carousel1.jpeg', 
+                    path: carousel1, 
                     text_1: '축적된 노하우,', 
                     text_2: '완벽한 품질을 추구하는 기업!',
                     class: 'carousel_text carousel_text_white'
                 }, {
-                    path: '/_nuxt/assets/image/main_carousel2.png', 
+                    path: carousel2, 
                     text_1: '주식회사 일신', 
                     text_2: '홈페이지 방문을 환영합니다!',
                     class: 'carousel_text carousel_text_black'
-                }, { 
-                    path: '/_nuxt/assets/image/main_carousel1.jpeg', 
+                },{ 
+                    path: carousel1, 
                     text_1: '축적된 노하우,', 
                     text_2: '완벽한 품질을 추구하는 기업!',
                     class: 'carousel_text carousel_text_white'
                 }, {
-                    path: '/_nuxt/assets/image/main_carousel2.png', 
+                    path: carousel2, 
                     text_1: '주식회사 일신', 
                     text_2: '홈페이지 방문을 환영합니다!',
                     class: 'carousel_text carousel_text_black'

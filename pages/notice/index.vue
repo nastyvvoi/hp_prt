@@ -20,18 +20,27 @@
                         <thead>
                             <tr>
                                 <th scope="cols">번호</th>
-                                <th scope="cols">제목</th>
-                                <th scope="cols">작성일</th>
-                                <th scope="cols">작성자</th>
+                                <th scope="cols" class="title">제목</th>
+                                <th scope="cols" class="date">작성일</th>
+                                <th scope="cols" class="writer">작성자</th>
                                 <!-- <th scope="cols">조회</th> -->
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody v-if="this.totalDataCount">
                             <tr v-for="(item, index) in this.pagingData" :key="index">
                                 <th scope="row">{{item.num}}</th>
                                 <td class="title"><span @click="onClickNotice">{{item.title}}</span></td>
                                 <td class="date">{{item.date}}</td>
                                 <td class="writer">{{item.writer}}</td>
+                            </tr>
+                        </tbody>
+                        <tbody v-else>
+                            <tr>
+                                <!-- <th scope="row"></th>
+                                <td class="title">공지사항이 없습니다.</td>
+                                <td class="date"></td>
+                                <td class="writer"></td> -->
+                                <td colspan="4">공지사항이 없습니다.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -44,7 +53,7 @@
                     <div class="pagination">
                       <a v-if="isPrev" @click="goPrev">&lt;</a>
                       <a v-for="p in pages" :key="p" :class="[p == currentPage ? 'active' : '']" @click="onClickPage(p)">{{p}}</a>
-                      <a @click="goNext">&gt;</a>
+                      <a v-if="this.totalDataCount" @click="goNext">&gt;</a>
                     </div>
                 </div>
             </div>
@@ -77,9 +86,7 @@ export default {
   },
   computed: {
     pages() {
-      console.log("############computed pages", this.endPage, this.startPage)
       var arr = new Array(this.endPage - this.startPage + 1).fill(this.startPage).map((n, i) => n + i)
-      console.log("############computed pages", arr)
       return arr
     },
     isPrev() {
@@ -93,7 +100,6 @@ export default {
   },
   watch: {
     totalDataCount() {
-      console.log("############totalDataCount")
       this.currentPage = 1
       this.totalPage = parseInt(this.totalDataCount / this.rowCount)
       if(this.totalDataCount % this.rowCount > 0)
@@ -103,7 +109,6 @@ export default {
     rowCount() {
       this.startPage = 1
       this.currentPage = 1
-      console.log("#######################rowCount")
       this.totalPage = parseInt(this.totalDataCount / this.rowCount)
       if(this.totalDataCount % this.rowCount > 0)
         this.totalPage++;
@@ -112,41 +117,36 @@ export default {
         this.endPage = this.totalPage
     },
     currentPage(val) {
-      console.log("@@@@@@@@@@@@@@@@@@watch currentpage", val)
       if(val != 1)
         this.currentPage = val
       else
         this.currentPage = 1
-
-      console.log(this.currentPage)
     }
   },
   created() {
     this.rowCount = 10
-    this.totalDataCount = 161
-    for(var i = 0; i < this.totalDataCount; i++){
-      var dataSet = {
-        num: i,
-        title: "글 제목 test test" + i,
-        content: "글 내용 ~~~" + i,
-        date: this.$moment(new Date()).format('YYYY-MM-DD'),
-        writer: "관리자"
-      }
-      this.dataList.unshift(dataSet)
-    }
+    // this.totalDataCount = 161
+    // for(var i = 0; i < this.totalDataCount; i++){
+    //   var dataSet = {
+    //     num: i,
+    //     title: "글 제목 test test" + i,
+    //     content: "글 내용 ~~~" + i,
+    //     date: this.$moment(new Date()).format('YYYY-MM-DD'),
+    //     writer: "관리자"
+    //   }
+    //   this.dataList.unshift(dataSet)
+    // }
     this.paging()
     this.setPageIndex()
   },
   methods: {
     setPageIndex(){
-      console.log("######################setPageIndex")
       this.startPage = ((this.currentPage - 1) / this.pageCount) * this.pageCount + 1
       this.endPage = this.startPage + this.pageCount - 1
       if(this.endPage > this.totalPage)
         this.endPage = this.totalPage
     },
     onClickPage(pageNum) {
-      console.log("@@@@@@@@@@@@onClickPage", pageNum)
       this.currentPage = pageNum
       this.paging()
     },
@@ -250,6 +250,27 @@ table.board_content thead {
   border-top: 2px solid #5c5c5c;
   background: #f2f2f2;
 }
+
+table.board_content thead th.title{
+  width: 650px;
+  padding: 10px;
+  vertical-align: top;
+  text-align: left;
+  font-size: 16px;
+}
+table.board_content thead th.date{
+  width: 200px;
+  padding: 10px;
+  vertical-align: top;
+  font-size: 16px;
+}
+table.board_content thead th.writer{
+  width: 120px;
+  padding: 10px;
+  vertical-align: top;
+  font-size: 16px;
+}
+
 table.board_content thead th {
   padding: 10px;
   font-weight: bold;
