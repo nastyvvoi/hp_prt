@@ -1,9 +1,9 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'hp_prt',
+    title: '주식회사 일신',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ko'
     },
     meta: [
       {
@@ -20,12 +20,12 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: '전자'
+        content: '주식회사 일신'
       },
       {
         hid: 'keyword',
         name: 'keyword',
-        content: ''
+        content: '일신, 주식회사 일신, LG냉장고용 콘덴서, MFC 공정, FIN, FIN 성형, FIN TUBE, 핀밀러, 경남 함안군'
       },
     ],
     link: [
