@@ -25,7 +25,7 @@ export default {
       {
         hid: 'keyword',
         name: 'keyword',
-        content: '일신, 주식회사 일신, LG냉장고용 콘덴서, MFC 공정, FIN, FIN 성형, FIN TUBE, 핀밀러, 경남 함안군'
+        content: '일신, 주식회사 일신, LG냉장고용 콘덴서, ilshin, ilshincorp, ilshincorp13, MFC 공정, FIN, FIN 성형, FIN TUBE, 핀밀러, 경남 함안군'
       },
       {
         name: 'naver-site-verification',
