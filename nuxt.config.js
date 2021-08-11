@@ -27,6 +27,10 @@ export default {
         name: 'keyword',
         content: '일신, 주식회사 일신, LG냉장고용 콘덴서, MFC 공정, FIN, FIN 성형, FIN TUBE, 핀밀러, 경남 함안군'
       },
+      {
+        name: 'naver-site-verification',
+        content: '5913962d1127cc9b70d47c0cae0adb948e2d2654'
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
