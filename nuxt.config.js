@@ -20,7 +20,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: '주식회사 일신'
+        content: '안녕하세요. 주식회사 일신 홈페이지입니다.'
       },
       {
         hid: 'keyword',
@@ -29,8 +29,20 @@ export default {
       },
       {
         name: 'naver-site-verification',
-        content: '5913962d1127cc9b70d47c0cae0adb948e2d2654'
+        content: 'ae17a16bfdaa4c94d621211ef2ae3ac7d74670ab'
       },
+      {
+        property: "og:title",
+        content: "주식회사 일신"
+      },
+      {
+        property: "og:description",
+        content: "안녕하세요. 주식회사 일신 홈페이지입니다."
+      },
+      {
+        name: 'robots',
+        content: 'index'
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -46,6 +58,10 @@ export default {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp'
       },
+      {
+        rel: 'canonical',
+        href: 'https://www.ilshincorp13.co.kr'
+      }
     ]
   },
 
@@ -70,6 +86,18 @@ export default {
   modules: [
     'bootstrap-vue/nuxt',
     '@nuxtjs/vuetify',
+    '@nuxtjs/robots',
+  ],
+  robots: [
+    {
+      UserAgent: 'Yeti',
+      Disallow: '/',
+      Allow: '/$',
+    }, {
+      UserAgent: 'Googlebot',
+      Disallow: '/',
+      Allow: '/$',
+    }
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
