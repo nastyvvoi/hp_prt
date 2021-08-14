@@ -26,12 +26,7 @@
 export default {
     data() {
         return {
-            // currentPage: { name: "회사소개", route: '/about'},
-            // itemList: [
-            //     { name: '인사말', route: '/company'},
-            //     { name: '연혁', route: '/history'},
-            //     { name: '조직도', route: '/organization'},
-            // ]
+
         }
     },
     props: [ 'currentPage', 'itemList'],

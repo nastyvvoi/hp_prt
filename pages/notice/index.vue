@@ -1,64 +1,62 @@
 <template>
     <div class="container">
-        <div style="padding-left:140px">
-            <div class="title">
-                <p>
-                    공지사항 | Notice
-                </p>
-                <hr/>
-            </div>
-            <div class="content_area">
-                <!-- <select name="제목">
-                    <option value="1">제목</option>
-                    <option value="2">내용</option>
-                </select> -->
-                <div class="board_area"
-                  @create="onCreate"
-                  @update="onUpdate"
-                  @delete="onDelete">
-                    <table class="board_content">
-                        <thead>
-                            <tr>
-                                <th scope="cols">번호</th>
-                                <th scope="cols" class="title">제목</th>
-                                <th scope="cols" class="date">작성일</th>
-                                <th scope="cols" class="writer">작성자</th>
-                                <!-- <th scope="cols">조회</th> -->
-                            </tr>
-                        </thead>
-                        <tbody v-if="this.totalDataCount">
-                            <tr v-for="(item, index) in this.pagingData" :key="index">
-                                <th scope="row">{{item.num}}</th>
-                                <td class="title"><span @click="onClickNotice">{{item.title}}</span></td>
-                                <td class="date">{{item.date}}</td>
-                                <td class="writer">{{item.writer}}</td>
-                            </tr>
-                        </tbody>
-                        <tbody v-else>
-                            <tr>
-                                <!-- <th scope="row"></th>
-                                <td class="title">공지사항이 없습니다.</td>
-                                <td class="date"></td>
-                                <td class="writer"></td> -->
-                                <td colspan="4">공지사항이 없습니다.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- <pagination
-                      :rowCount="rowCount"
-                      :totalDataCount="totalDataCount"
-                      :pageCount="pageCount"
-                      @get-current-page="getCurrentPage"
-                    /> -->
-                    <div class="pagination">
-                      <a v-if="isPrev" @click="goPrev">&lt;</a>
-                      <a v-for="p in pages" :key="p" :class="[p == currentPage ? 'active' : '']" @click="onClickPage(p)">{{p}}</a>
-                      <a v-if="this.totalDataCount" @click="goNext">&gt;</a>
-                    </div>
+        <div class="title">
+            <p>
+                공지사항 | Notice
+            </p>
+            <hr/>
+        </div>
+        <div class="content_area">
+            <!-- <select name="제목">
+                <option value="1">제목</option>
+                <option value="2">내용</option>
+            </select> -->
+            <div class="board_area"
+              @create="onCreate"
+              @update="onUpdate"
+              @delete="onDelete">
+                <table class="board_content">
+                    <thead>
+                        <tr>
+                            <th scope="cols">번호</th>
+                            <th scope="cols" class="title">제목</th>
+                            <th scope="cols" class="date">작성일</th>
+                            <th scope="cols" class="writer">작성자</th>
+                            <!-- <th scope="cols">조회</th> -->
+                        </tr>
+                    </thead>
+                    <tbody v-if="this.totalDataCount">
+                        <tr v-for="(item, index) in this.pagingData" :key="index">
+                            <th scope="row">{{item.num}}</th>
+                            <td class="title"><span @click="onClickNotice">{{item.title}}</span></td>
+                            <td class="date">{{item.date}}</td>
+                            <td class="writer">{{item.writer}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody v-else>
+                        <tr>
+                            <!-- <th scope="row"></th>
+                            <td class="title">공지사항이 없습니다.</td>
+                            <td class="date"></td>
+                            <td class="writer"></td> -->
+                            <td colspan="4">공지사항이 없습니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <pagination
+                  :rowCount="rowCount"
+                  :totalDataCount="totalDataCount"
+                  :pageCount="pageCount"
+                  @get-current-page="getCurrentPage"
+                /> -->
+                <div class="pagination">
+                  <a v-if="isPrev" @click="goPrev">&lt;</a>
+                  <a v-for="p in pages" :key="p" :class="[p == currentPage ? 'active' : '']" @click="onClickPage(p)">{{p}}</a>
+                  <a v-if="this.totalDataCount" @click="goNext">&gt;</a>
                 </div>
             </div>
-            <nuxt-child/>
         </div>
+        <nuxt-child/>
     </div>
 </template>
 

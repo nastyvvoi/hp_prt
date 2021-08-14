@@ -20,30 +20,15 @@
         <div class="route_nav">
           <p>
             <span class="material-icons-outlined" style="color:#4375DB;vertical-align:middle;padding-right:10px">home</span>
-            <!-- <span class="route_text">Home</span> -->
             <a class="route_text" href="/" @click="navClick">home</a>
-            <!-- <nuxt-link class="route_text" to="/" @click="navClick">home</nuxt-link> -->
             <span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
-            <!-- <span class="route_text">{{currentPage.name}}</span> -->
             <nuxt-link class="route_text" :to="currentPage.route" @click="navClick">{{currentPage.name}}</nuxt-link>
             <span class="material-icons-outlined" style="color:#bdbdbd;vertical-align:middle">chevron_right</span>
             <span class="route_text">{{secondRoute}}</span>
           </p>
         </div>
       </div>
-      <!-- <div class="banner_area">
-        <div v-if="isMain">
-          <img class="img_banner" src="~/assets/image/bg_main.jpeg"/>
-          <div class="text_banner">
-            <p>{{currentPage}}</p>
-            <p style="font-size:26px; color:white">{{since}}</p>
-          </div>
-        </div>
-        <div v-else>
-          <img class="img_bg" src="~/assets/image/default_bg.png"/>
-        </div>
-      </div> -->
-      <vertical-menu v-if="!isMain" :currentPage="currentPage" :itemList="itemList" class="vertical_menu"/>
+      <vertical-menu v-if="!isMobile && !isMain" :currentPage="currentPage" :itemList="itemList" class="vertical_menu"/>
     </div>
 </template>
 
@@ -55,7 +40,7 @@ export default {
     return {
       currentPage: {},
       itemList: [],
-      since: "since 2013",
+      isMobile: false,
       isMain: true,
       isie: true,
       scrolled: null,
@@ -154,6 +139,9 @@ export default {
     VerticalMenu
   },
   computed: {
+    checkisMobile() {
+      return this.$store.getters.isMobile
+    },
     checkisMain() {
       return this.$store.getters.isMain
     },
@@ -165,8 +153,10 @@ export default {
     }
   },
   watch: {
+    checkisMobile(val) {
+      this.isMobile = val
+    },
     checkisMain(val) {
-      console.log("val", val)
       this.isMain = val
     },
     checkCurrentPage(val) {

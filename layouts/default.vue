@@ -2,7 +2,7 @@
   <div class="app">
     <div class="main">
       <Navbar/>
-      <div class="container">
+      <div :class="{ main_container : !isMobile, container}">
         <nuxt/>
       </div>
       <Footer/>
@@ -23,7 +23,8 @@ export default {
         "min-height": this.msize + "px"
       },
       open: false,
-      offsetWidth: ""
+      offsetWidth: "",
+      isMobile: false,
     };
   },
   methods: {
@@ -34,15 +35,33 @@ export default {
     isMobileMount() {
       this.offsetWidth = document.documentElement.offsetWidth;
       if (this.offsetWidth <= 960) {
-        this.open = false;
+        this.$store.commit("setIsMobile", true)
+        this.$store.commit("containerPadding", 0)
+      } else {
+        this.$store.commit("setIsMobile", false)
+        this.$store.commit("containerPadding", 140)
       }
     },
-    isMobile() {
+    defaultCheck() {
       this.offsetWidth = document.documentElement.offsetWidth;
       if (this.offsetWidth >= 960) {
-        this.open = true;
+        this.$store.commit("setIsMobile", false)
+        this.$store.commit("containerPadding", 140)
+      } else {
+        this.$store.commit("setIsMobile", true)
+        this.$store.commit("containerPadding", 0)
       }
     }
+  },
+  computed: {
+    checkisMobile() {
+      return this.$store.getters.isMobile
+    },
+  },
+  watch: {
+    checkisMobile(val) {
+      this.isMobile = val
+    },
   },
   created() {
   },
@@ -51,7 +70,7 @@ export default {
   },
 
   beforeMount() {
-    this.isMobile();
+    this.defaultCheck();
     window.addEventListener("resize", this.msizing);
     window.addEventListener("resize", this.isMobileMount);
   },
@@ -89,7 +108,7 @@ html {
 }
 body {
   height: 100% !important;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
 }
 
@@ -108,9 +127,11 @@ body {
   /* height: 100% !important; */
 }
 
+.main_container {
+  padding-left: 160px;
+}
+
 .container {
-  /* float: left; */
-  /* padding-left: 100px !important; */
   max-width: 1385px;
   margin: 0px auto;
 }

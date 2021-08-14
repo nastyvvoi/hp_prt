@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <div style="padding-left:140px">
         <div class="title">
             <p>
                 회사소개 | About Company
@@ -48,7 +47,6 @@
             <p style="vertical-align:middle">
                 <span style="font-size:20px">대표이사</span>&emsp; <span style="font-size:26px">배  종  호</span>
             </p>
-        </div>
         </div>
     </div>
 </template>

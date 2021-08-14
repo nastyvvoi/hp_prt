@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <div style="padding-left:140px">
         <div class="title">
             <p>
                 회사소개 | About Company
@@ -15,7 +14,6 @@
         </div>
         <div class="organization">
             <img class="organization_img" src="~/assets/image/organization.jpeg"/>
-        </div>
         </div>
     </div>
 </template>

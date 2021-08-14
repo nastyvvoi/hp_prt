@@ -1,15 +1,13 @@
 <template>
     <div class="container">
-        <div style="padding-left:140px">
-            <div class="title">
-                <p>
-                    공지사항 | Notice
-                </p>
-                <hr/>
-            </div>
-            <div class="board_area">
-                <news-form/>
-            </div>
+        <div class="title">
+            <p>
+                공지사항 | Notice
+            </p>
+            <hr/>
+        </div>
+        <div class="board_area">
+            <news-form/>
         </div>
     </div>
 </template>

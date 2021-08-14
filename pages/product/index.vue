@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <div style="padding-left:140px">
         <div class="title">
             <p>
                 MFC 공정
@@ -176,13 +175,16 @@
                 </b-row>
             </b-container>
         </div>
-        </div>
     </div>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
 
+        }
+    },
 }
 </script>
 
