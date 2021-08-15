@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="wrapper_container">
       <div class="title">
           <p>
               오시는 길 | Location
@@ -54,20 +54,8 @@
   export default {
     data() {
       return {
-           items: [
-        {
-          name: "롯데월드",
-          icon: "fa fa-warehouse",
-          src:
-            "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1520.3430765791868!2d127.09756590452133!3d37.510727927133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca5a7250efe81%3A0x433df2c1fec03b98!2z66Gv642w7JuU65Oc!5e0!3m2!1sko!2skr!4v1624700735616!5m2!1sko!2skr",
-          english: "",
-          address: "서울특별시 송파구 잠실동 올림픽로 240",
-          phone: "02-***-****",
-          fax: "02-***-****"
-        }
-      ],
-      scrollToTop: true,
-      offSetWidth: ''
+        scrollToTop: true,
+        offSetWidth: ''
       }
     },
     mounted() {
@@ -85,11 +73,6 @@
   }
 </script>
 <style scoped>
-
-.container {
-    width: 100%;
-    margin: auto;
-}
 
 .title {
     font-size: 40px;
@@ -109,6 +92,7 @@
   width: 100%;
   height: auto;
   border: 2px solid #cccccc;
+  margin: auto;
 }
 
 .rough_map img {

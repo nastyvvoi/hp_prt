@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="wrapper_container">
         <div class="title">
             <p>
                 회사소개 | About Company
@@ -65,10 +65,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    width: 100%;
-    margin: auto;
-}
 
 .title {
     font-size: 40px;

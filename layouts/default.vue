@@ -132,7 +132,7 @@ body {
 }
 
 .main_container {
-  padding-left: 160px;
+  /* padding-left: 160px; */
 }
 
 .container {

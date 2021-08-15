@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="default_container">
         <div class="main_area">
             <div class="left_area">
                 <div class="outer_box" @click="onClickOuterBox('/about/company')">
@@ -205,6 +205,10 @@ export default {
     .main_area {
         width: 1280px;
     }
+}
+
+.default_container {
+  text-align: center;
 }
 
 .main_area {

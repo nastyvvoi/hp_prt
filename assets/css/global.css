@@ -47,6 +47,15 @@ html * {
       /* height: 100% !important; */
   }
 
-.container {
+.wrapper_container {
+  width: 100%;
+  margin: auto;
   text-align: center;
+  padding: 10px;
+}
+
+@media screen and (min-width: 976px) {
+  .wrapper_container {
+    padding-left: 170px !important;
+  }
 }
