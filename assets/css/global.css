@@ -46,3 +46,7 @@ html * {
   #__nuxt, #__layout {
       /* height: 100% !important; */
   }
+
+.container {
+  text-align: center;
+}

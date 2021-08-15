@@ -40,7 +40,8 @@
 }
 
 .organization_img {
-    width: 980px;
+    max-width: 980px;
+    width: 100%;
     height: auto;
 }
 

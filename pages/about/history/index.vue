@@ -48,7 +48,8 @@
 }
 
 .history_img {
-    width: 905px;
+    max-width: 905px;
+    width: 100%;
     height: auto;
 }
 

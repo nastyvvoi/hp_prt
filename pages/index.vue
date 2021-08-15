@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <div class="center_area">
+            <div v-if="!isMobile" class="center_area">
                 <v-carousel class="center_carousel">
                     <v-carousel-item class="carousel_items" v-for="(item, index) in carouselData" :key='index'>
                         <img :src='item.path'>
@@ -114,7 +114,7 @@ import carousel2 from '~/assets/image/main_carousel2.png'
 export default {
     data () {
         return {
-            model: 0,
+            isMobile: false,
             carouselData: [
                 { 
                     path: carousel1, 
@@ -139,6 +139,16 @@ export default {
                 }
             ]
         }
+    },
+    computed: {
+        checkisMobile() {
+            return this.$store.getters.isMobile
+        },
+    },
+    watch: {
+        checkisMobile(val) {
+            this.isMobile = val
+        },
     },
     methods: {
         onClickOuterBox(path) {
@@ -191,8 +201,14 @@ export default {
 </script>
 
 <style>
+@media screen and (min-width: 992px) {
+    .main_area {
+        width: 1280px;
+    }
+}
+
 .main_area {
-    width: 1280px;
+    mid-width: 380px;
     display: inline-block;
     text-align: center;
 }

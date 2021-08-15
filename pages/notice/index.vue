@@ -248,7 +248,13 @@ table.board_content thead {
   border-top: 2px solid #5c5c5c;
   background: #f2f2f2;
 }
-
+table.board_content thead th{
+  min-width: 50px;
+  padding: 10px;
+  vertical-align: top;
+  text-align: left;
+  font-size: 16px;
+}
 table.board_content thead th.title{
   width: 650px;
   padding: 10px;

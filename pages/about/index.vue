@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <div class="pc-size">
         <div class="title">
             <p>
                 회사소개 | About Company
@@ -49,7 +48,6 @@
                 <span style="font-size:20px">대표이사</span>&emsp; <span style="font-size:26px">배  종  호</span>
             </p>
         </div>
-        </div>
         <nuxt-child/>
     </div>
 </template>
@@ -77,19 +75,25 @@ export default {
     font-weight: 500;
     padding-top: 40px;
 }
-
+@media screen and (min-width: 992px) {
+    .sub_title, .about_detail {
+        padding-left: 120px;
+    }
+}
 .sub_title {
     font-size: 26px;
     font-weight: 500;
+    text-align: left;
 }
 
 .about_detail {
     font-size: 18px;
+    text-align: left;
 }
 
 .rep {
+    width: 70%;
     text-align: right;
-    padding-right: 300px;
 }
 
 .hr {

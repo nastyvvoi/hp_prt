@@ -2,7 +2,7 @@
   <div class="app">
     <div class="main">
       <Navbar/>
-      <div :class="{ main_container : !isMobile, container}">
+      <div :class="{ main_container : !isMobile && !isMain}">
         <nuxt/>
       </div>
       <Footer/>
@@ -25,6 +25,7 @@ export default {
       open: false,
       offsetWidth: "",
       isMobile: false,
+      isMain: true,
     };
   },
   methods: {
@@ -36,20 +37,16 @@ export default {
       this.offsetWidth = document.documentElement.offsetWidth;
       if (this.offsetWidth <= 960) {
         this.$store.commit("setIsMobile", true)
-        this.$store.commit("containerPadding", 0)
       } else {
         this.$store.commit("setIsMobile", false)
-        this.$store.commit("containerPadding", 140)
       }
     },
     defaultCheck() {
       this.offsetWidth = document.documentElement.offsetWidth;
       if (this.offsetWidth >= 960) {
         this.$store.commit("setIsMobile", false)
-        this.$store.commit("containerPadding", 140)
       } else {
         this.$store.commit("setIsMobile", true)
-        this.$store.commit("containerPadding", 0)
       }
     }
   },
@@ -57,24 +54,31 @@ export default {
     checkisMobile() {
       return this.$store.getters.isMobile
     },
+    checkisMain() {
+      return this.$store.getters.isMain
+    },
   },
   watch: {
     checkisMobile(val) {
       this.isMobile = val
     },
+    checkisMain(val) {
+      this.isMain = val
+    },
   },
   created() {
+    
+  },
+  beforeMount() {
+    this.$nextTick(() => {
+      this.defaultCheck();
+      window.addEventListener("resize", this.msizing);
+      window.addEventListener("resize", this.isMobileMount);
+    })
   },
   mounted() {
     this.styleobject["min-height"] = window.innerHeight - 327 + "px";
   },
-
-  beforeMount() {
-    this.defaultCheck();
-    window.addEventListener("resize", this.msizing);
-    window.addEventListener("resize", this.isMobileMount);
-  },
-
   beforeDestroy() {
     window.removeEventListener("resize", this.msizing);
     window.removeEventListener("resize", this.isMobileMount);

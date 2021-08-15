@@ -3,7 +3,6 @@ import Vuex from 'vuex';
 const store = () => new Vuex.Store({
     state: {
         isMobile: false,
-        containerPadding: 140,
         isMain: true,
         currentPage: { name: '', route: ''},
         itemList: [],
@@ -12,7 +11,6 @@ const store = () => new Vuex.Store({
     },
     getters: {
         isMobile: state => { return state.isMobile },
-        containerPadding: state => { return state.containerPadding },
         isMain: state => { return state.isMain },
         currentPage: state => { return state.currentPage },
         itemList: state => { return state.itemList },
@@ -20,8 +18,7 @@ const store = () => new Vuex.Store({
         secondRoute: state => { return state.secondRoute },
     },
     mutations: {
-        setIsMobile: (state, isMobile) => state.isMobile = isMobile, 
-        setContainerPadding: (state, containerPadding) => state.containerPadding = containerPadding, 
+        setIsMobile: (state, isMobile) => state.isMobile = isMobile,
         setIsMain: (state, isMain) => state.isMain = isMain, 
         setCurrentPage: (state, currentPage) => state.currentPage = currentPage,
         setItemList: (state, itemList) => state.itemList = itemList,

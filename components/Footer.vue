@@ -2,67 +2,35 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="info">
-      <div class="logo_area">
-        <img src="~assets/image/Logo_bg_trans.png" style="height:80px;width:253px"/>
-      </div>
-      <div class="info_area">
-        <p>
-          <span class="info_text_span">(주)일신</span>
-          <span class="info_text_span left_border_span">대표이사 배종호</span>
-          <span class="info_text_span left_border_span">TEL : 055-585-0686</span>
-          <span class="info_text_span left_border_span">FAX : 055-585-0803</span>
-        </p>
-        <p>
-          <span class="info_text_span">사업자등록번호 : 859-88-00133</span>
-          <span class="info_text_span left_border_span">Email : ilshincorp13@naver.com</span>
-        </p>
-        <p>
-          <span class="info_text_span">소재지 : 본사(2공장) : 경남 함안군 법수면 장백로 528-8 (주)일신</span>
-          <br>
-          <span class="info_text_span" style="padding-left:101px">(1공장) : 경남 함안군 법수면 장백로 528-58</span>
-        </p>
-        <p>
-          <span class="info_text_span">COPYRIGHTⓒ {{this.getFullYear}} ilshin Corp. All Rights Reserved.</span>
-        </p>
-        
-        <!-- <p class="info_text">
-          <span class="info_row">
-            <strong class="strong_text">(주) 일신</strong>
-            <strong class="strong_text">대표</strong>배종호
-            <strong class="strong_text">사업자 등록번호</strong>859-88-00133
-          </span>
-          <br>
-          <span class="info_row">
-            <strong class="strong_text">
-              주소
-            </strong>
-              경남 함안군 법수면 장백로 528-8
-            <strong class="strong_text">
-              E-mail
-            </strong>
-              ilshincorp13@naver.com
-          </span>
-          <br>
-          <span class="info_row">
-            <strong class="strong_text">
-              대표전화
-            </strong>
-              055-585-0686
-            <strong class="strong_text">
-              FAX
-            </strong>
-              055-585-0803
-          </span>
-          <br>
-          <br>
-          <span class="info_row">
-            <strong class="strong_text">
-              COPYRIGHTⓒ {{this.getFullYear}} ilshin Corp. 
-            </strong>
-              All Rights Reserved.
-          </span>
-        </p> -->
-      </div>
+      <b-row>
+        <b-col class="ml-sm-auto outer_wrapper" lg="3">
+          <div class="logo_area">
+            <img src="~assets/image/Logo_bg_trans.png" style="height:80px;width:253px"/>
+          </div>
+        </b-col>
+        <b-col class="ml-md-auto outer_wrapper">
+          <div class="info_area">
+            <p>
+              <span class="info_text_span">(주)일신</span>
+              <span class="info_text_span left_border_span">대표이사 배종호</span>
+              <span class="info_text_span left_border_span">TEL : 055-585-0686</span>
+              <span class="info_text_span left_border_span">FAX : 055-585-0803</span>
+            </p>
+            <p>
+              <span class="info_text_span">사업자등록번호 : 859-88-00133</span>
+              <span class="info_text_span left_border_span">Email : ilshincorp13@naver.com</span>
+            </p>
+            <p>
+              <span class="info_text_span">소재지 : 본사(2공장) : 경남 함안군 법수면 장백로 528-8 (주)일신</span>
+              <br>
+              <span class="info_text_span" style="padding-left:101px">(1공장) : 경남 함안군 법수면 장백로 528-58</span>
+            </p>
+            <p>
+              <span class="info_text_span">COPYRIGHTⓒ {{this.getFullYear}} ilshin Corp. All Rights Reserved.</span>
+            </p>
+          </div>
+        </b-col>
+      </b-row>
     </div>
   </footer>
 </template>
@@ -106,7 +74,7 @@ hr {
 
 .footer {
   /* flex-shrink: 0; */
-  height: 220px;
+  /* height: 220px; */
   background-color: #f6f6f6;
   color: #777777;
   position: relative;
@@ -114,9 +82,13 @@ hr {
 
 .info {
   padding-top: 30px;
-  padding-left:100px;
+  padding-left:30px;
 }
-
+@media screen and (min-width: 640px) {
+  .logo_area, .info_area { 
+    padding-left: 60px;
+  }
+}
 .logo_area {
   /* padding-left: 100px; */
   height: 100px;
@@ -125,7 +97,7 @@ hr {
 }
 
 .info_area {
-  padding-left: 120px;
+  /* padding-left: 120px; */
   float: left;
 }
 

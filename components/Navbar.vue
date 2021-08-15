@@ -1,7 +1,7 @@
 <template>
     <div>
       <b-navbar class="navbar fixed-top" toggleable="lg" variant="info">
-        <b-navbar-brand to="/" @click="navClick">
+        <b-navbar-brand href="/" @click="navClick">
           <img src="~/assets/image/Logo.jpeg" class alt="BV" style="height:80px;width:253px">
         </b-navbar-brand>
 
@@ -9,7 +9,12 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav class="ml-auto menu_group">
-            <b-nav-item to="/about/company" @click="navClick">회사소개</b-nav-item>
+            <!-- <b-nav-item to="/about/company" @click="navClick">회사소개</b-nav-item> -->
+            <b-nav-item-dropdown text="회사소개" right>
+              <b-dropdown-item to="/about/company" @click="navClick">인사말</b-dropdown-item>
+              <b-dropdown-item to="/about/history" @click="navClick">연혁</b-dropdown-item>
+              <b-dropdown-item to="/about/organization" @click="navClick">조직도</b-dropdown-item>
+            </b-nav-item-dropdown>
             <b-nav-item to="/product" @click="navClick">제품소개</b-nav-item>
             <b-nav-item to="/notice" @click="navClick">공지사항</b-nav-item>
             <b-nav-item to="/location" @click="navClick">오시는길</b-nav-item>
@@ -189,7 +194,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style>
 
 .bg-info {
   background-color: #fff !important;
@@ -248,27 +253,62 @@ img {
   height: 5vh;
 }
 
-.menu_group {
-  padding-right: 100px;
+@media screen and (min-width: 992px) {
+  .menu_group {
+    padding-right: 100px;
+  }
+  .nav-link::before {
+    transition: 300ms;
+    height: 3px;
+    content: "";
+    position: absolute;
+    background-color: #031D44;
+    width: 0%;
+    bottom: 28px;
+  }
+  .dropdown-toggle::before{
+    transition: 300ms;
+    height: 3px;
+    content: "";
+    /* position: absolute; */
+    background-color: #031D44;
+    width: 0%;
+    bottom: 6px;
+  }
+  .dropdown-toggle:hover::before {
+    bottom: 6px !important;
+    width: 60px;
+  }
+
+  .nav-link:hover::before{
+    bottom: 28px;
+    width: 60px;
+  }
 }
 
-.nav-link::before {
-  transition: 300ms;
-  height: 3px;
-  content: "";
-  position: absolute;
-  background-color: #031D44;
-  width: 0%;
-  bottom: 28px;
+@media screen and (max-width: 991px) {
+  .nav-item {
+    background-color: #fff;
+    border: 1px solid #cccccc;
+  }
 }
 
-
-.nav-link:hover::before {
-  bottom: 28px;
-  width: 60px;
+.b-nav-dropdown {
+  text-align: center;
+}
+.dropdown-menu {
+  text-align: center !important;
+  line-height: 48px;
 }
 
+.dropdown-item {
+  height: 56px !important;
+  vertical-align: middle !important;
+}
 
+.dropdown-toggle::after {
+  display: none !important;
+}
 .navbar-inverse .navbar-collapse {
   background-color: white;
   color: black;
@@ -276,13 +316,21 @@ img {
 
 .nav-link {
   text-align: center;
-  padding-top: 15px;
-  padding-left: 10px;
+  padding: 10px;
 }
 
 @media (min-width: 992px) {
   .mainlink {
     display: none;
+  }
+  .route_nav {
+    margin-right: 200px;
+  }
+}
+
+@media (max-width: 991px) {
+  .route_nav {
+    margin-right: 100px;
   }
 }
 
@@ -296,7 +344,6 @@ img {
   text-align: right;
   line-height:60px;
   vertical-align: middle;
-  margin-right: 200px;
 }
 
 .route_text {

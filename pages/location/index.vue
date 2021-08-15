@@ -14,46 +14,39 @@
       <br>
       <hr class="hr_thick"/>
       <div class="address_wrapper">
-        <div class="address_area">
-          <hr class="thick_red"/>
-          <p style="font-size:22px">
-            본사(2공장) / 1공장
-          </p>
-          <p class="info_detail" style="margin:0px">
-            본 &nbsp;사(2공장): 경남 함안군 법수면 장백로 528-8
-          </p>
-          <p class="info_detail">
-            1공장: 경남 함안군 법수면 장백로 528-58
-          </p>
-        </div>
-        <div class="divider"></div>
-        <div class="tel_area">
-          <hr class="thick_red"/>
-          <p style="font-size:22px">
-            전화번호
-          </p>
-          <p class="info_detail" style="margin:0px">
-            TEL: 055-585-0686 / FAX: 055-585-0803
-          </p>
-          <p class="info_detail">
-            E-mail: ilshincorp13@naver.com
-          </p>
-        </div>
+        <b-row>
+          <b-col class="ml-md-auto outer_wrapper" md="6">
+            <div class="address_area">
+              <hr class="thick_red"/>
+              <p style="font-size:22px">
+                본사(2공장) / 1공장
+              </p>
+              <p class="info_detail" style="margin:0px">
+                본 &nbsp;사(2공장): 경남 함안군 법수면 장백로 528-8
+              </p>
+              <p class="info_detail">
+                1공장: 경남 함안군 법수면 장백로 528-58
+              </p>
+            </div>
+            <div class="divider"></div>
+          </b-col>
+          
+          <b-col class="ml-md-auto outer_wrapper">
+            <div class="tel_area">
+              <hr class="thick_red"/>
+              <p style="font-size:22px">
+                전화번호
+              </p>
+              <p class="info_detail" style="margin:0px">
+                TEL: 055-585-0686 / FAX: 055-585-0803
+              </p>
+              <p class="info_detail">
+                E-mail: ilshincorp13@naver.com
+              </p>
+            </div>
+          </b-col>
+        </b-row>
       </div>
-      <!-- <div class="address">
-          <br>
-          <p>
-              ◎ 주소 및 연락처
-          </p>
-      </div>
-      <div class="address_detail">
-          <p>
-              (본사/2공장) 경남 함안군 법수면 장백로 528-8. (주)일신 / Tel: 055-585-0686 / Fax: 055-585-0803
-          </p>
-          <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(1공장) 경남 함안군 법수면 장백로 528-58
-          </p>
-      </div> -->
     </div>
 </template>
 
@@ -112,7 +105,16 @@
 }
 
 .rough_map {
+  max-width: 960px;
+  width: 100%;
+  height: auto;
   border: 2px solid #cccccc;
+}
+
+.rough_map img {
+  max-width: 960px;
+  width: 100%;
+  height: auto;
 }
 
 .hr_thick {
@@ -122,32 +124,34 @@
 
 .address_wrapper {
     position: relative;
-    height:200px;
+    /* height:200px; */
     padding:10px;
     /* background: blue; */
+    text-align: left;
 }
 
 .divider{
     position:absolute;
-    left:50%;
+    left:100%;
     top:10%;
     bottom:10%;
     border-left:1px solid #cccccc;
 }
 
 .address_area {
-    width:45%;
-    height:200px;
+    /* width:45%; */
+    /* height:200px; */
     float:left;
     background:white;
     margin: 10px;
     padding:20px;
+    text-align: left;
 }
 
 .tel_area {
-    width:45%;
-    height:200px;
-    float:right;
+    /* width:45%; */
+    /* height:200px; */
+    float:left;
     /* background: white; */
     margin: 10px;
     padding:20px;
