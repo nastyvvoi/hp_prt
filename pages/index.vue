@@ -87,6 +87,7 @@
                             <p>공지사항</p>
                         </div>
                         <div class="box_content_area">
+                            <p style="margin-bottom:0px" v-for="(item, index) in boardData">{{item.title}}</p>
                         </div>
                     </div>
                 </div>
@@ -110,6 +111,10 @@
 <script>
 import carousel1 from '~/assets/image/main_carousel1.jpeg'
 import carousel2 from '~/assets/image/main_carousel2.png'
+
+import { DB } from "~/services/fireinit.js";
+
+import { firestorage } from "~/services/fireinit.js";
 
 export default {
     data () {
@@ -137,7 +142,8 @@ export default {
                     text_2: '홈페이지 방문을 환영합니다!',
                     class: 'carousel_text carousel_text_black'
                 }
-            ]
+            ],
+            boardData: []
         }
     },
     computed: {
@@ -150,7 +156,21 @@ export default {
             this.isMobile = val
         },
     },
+     created() {
+        this.$nextTick(() => {
+             this.getData()
+        })
+        
+    },
     methods: {
+        async getData() {
+            await DB.collection('ilshincorp13').doc('noticeBoard').collection('notice').orderBy("createdAt", "desc").get()
+            .then(result => {
+                result.forEach(doc => {
+                    this.boardData.push(doc.data())
+                });
+            });
+        },
         onClickOuterBox(path) {
             var pathName = path
             if(pathName == "/"){
@@ -215,6 +235,12 @@ export default {
     mid-width: 380px;
     display: inline-block;
     text-align: center;
+}
+
+.left_area, .right_area {
+    width: 264px;
+    height: 806px;
+    display: inline-block;
 }
 
 .center_area {
@@ -290,12 +316,6 @@ export default {
 
 .v-carousel__controls {
     display: none !important;
-}
-
-.left_area, .right_area {
-    width: 264px;
-    height: 806px;
-    display: inline-block;
 }
 
 .outer_box {
