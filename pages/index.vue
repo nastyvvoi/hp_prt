@@ -5,7 +5,7 @@
                 <div class="outer_box" @click="onClickOuterBox('/about/company')">
                     <div class="inner_box">
                         <div class="inner_box_text box_title_area">
-                            <p>회사소개</p>
+                            <p class="inner_box_semi_title">회사소개</p>
                         </div>
                         <div class="box_content_area">
                             <div class="inner_box_text" style="margin-left:10px">
@@ -87,7 +87,12 @@
                             <p>공지사항</p>
                         </div>
                         <div class="box_content_area">
-                            <p style="margin-bottom:0px" v-for="(item, index) in boardData">{{item.title}}</p>
+                            <div class="inner_box_text" style="margin-left:10px">
+                                <p v-if="boardData.length != 0" :style="{ paddingTop: (index * 24) + 'px'}" v-for="(item, index) in boardData" :key="index">
+                                    {{item.title}}
+                                </p>
+                                <p v-if="boardData.length == 0">공지사항이 없습니다.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -111,9 +116,7 @@
 <script>
 import carousel1 from '~/assets/image/main_carousel1.jpeg'
 import carousel2 from '~/assets/image/main_carousel2.png'
-
 import { DB } from "~/services/fireinit.js";
-
 import { firestorage } from "~/services/fireinit.js";
 
 export default {
@@ -156,11 +159,10 @@ export default {
             this.isMobile = val
         },
     },
-     created() {
+    created() {
         this.$nextTick(() => {
-             this.getData()
+            // this.getData()
         })
-        
     },
     methods: {
         async getData() {
@@ -170,6 +172,7 @@ export default {
                     this.boardData.push(doc.data())
                 });
             });
+            this.boardData = this.boardData.slice(0, 3)
         },
         onClickOuterBox(path) {
             var pathName = path
@@ -253,7 +256,7 @@ export default {
 
 .center_carousel {
     width: 600px;
-    height: 806px !important;
+    height: 806px;
 }
 
 .carousel_items {
@@ -261,7 +264,18 @@ export default {
     height: 806px;
     position: relative;
 }
+.v-carousel {
+    height: 806px !important;
+}
+.v-window {
+    height: 806px !important;
+}
+.v-window__container {
+    height: 806px !important;
+}
+.v-window-item {
 
+}
 .carousel_items img{
     position: absolute;
     top:0;
@@ -341,6 +355,10 @@ export default {
 
 .inner_box_text p {
     position: absolute;
+}
+
+.inner_box_semi_title {
+    /* width: 94px; */
 }
 
 .phone_num {

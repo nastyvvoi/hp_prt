@@ -27,18 +27,14 @@
                     </thead>
                     <tbody v-if="this.totalDataCount">
                         <tr v-for="(item, index) in this.pagingData" :key="index">
-                            <th scope="row">{{item.num}}</th>
-                            <td class="title"><span @click="onClickNotice">{{item.title}}</span></td>
-                            <td class="date">{{item.date}}</td>
+                            <th scope="row">{{item.key_num}}</th>
+                            <td class="title"><span @click="onClickNotice(item.key_num)">{{item.title}}</span></td>
+                            <td class="date">{{secondsToDate(item.createdAt.seconds)}}</td>
                             <td class="writer">{{item.writer}}</td>
                         </tr>
                     </tbody>
                     <tbody v-else>
                         <tr>
-                            <!-- <th scope="row"></th>
-                            <td class="title">공지사항이 없습니다.</td>
-                            <td class="date"></td>
-                            <td class="writer"></td> -->
                             <td colspan="4">공지사항이 없습니다.</td>
                         </tr>
                     </tbody>
@@ -62,6 +58,8 @@
 
 <script>
 import pagination from '~/components/Pagination.vue';
+import { DB } from "~/services/fireinit.js";
+import { firestorage } from "~/services/fireinit.js";
 
 export default {
   data() {
@@ -121,23 +119,22 @@ export default {
         this.currentPage = 1
     }
   },
-  created() {
+  async created() {
     this.rowCount = 10
-    // this.totalDataCount = 161
-    // for(var i = 0; i < this.totalDataCount; i++){
-    //   var dataSet = {
-    //     num: i,
-    //     title: "글 제목 test test" + i,
-    //     content: "글 내용 ~~~" + i,
-    //     date: this.$moment(new Date()).format('YYYY-MM-DD'),
-    //     writer: "관리자"
-    //   }
-    //   this.dataList.unshift(dataSet)
-    // }
+    // await this.getData()
+    this.totalDataCount = this.dataList.length
     this.paging()
     this.setPageIndex()
   },
   methods: {
+    async getData() {
+      await DB.collection('ilshincorp13').doc('noticeBoard').collection('notice').orderBy("createdAt", "desc").get()
+        .then(result => {
+          result.forEach(doc => {
+            this.dataList.push(doc.data())
+        });
+      });
+    },
     setPageIndex(){
       this.startPage = ((this.currentPage - 1) / this.pageCount) * this.pageCount + 1
       this.endPage = this.startPage + this.pageCount - 1
@@ -189,8 +186,8 @@ export default {
         return a.num > b.num ? -1 : a.num < b.num ? 1 : 0
       })
     },
-    onClickNotice() {
-      this.$router.push('/notice/board')
+    onClickNotice(param) {
+      this.$router.push('/notice/board/' + param)
       this.$store.commit('setSecondRoute', '게시판')
     },
     getCurrentPage(val){
@@ -205,7 +202,33 @@ export default {
     },
     onDelete() {
       console.log("onDelete")
-    }
+    },
+    secondsToDate(seconds){
+      var _this = this;
+      var date = new Date(seconds * 1000);
+      var year = date.getFullYear();
+      var month = _this.fixDigit(date.getMonth() + 1);
+      var day = _this.fixDigit(date.getDate());
+      var hour = date.getHours();
+      var minute = _this.fixDigit(date.getMinutes());
+      var week = new Array('일', '월', '화', '수', '목', '금', '토');
+      return year + '-' + month + '-' + day
+      // var convert_date = year + "년 "+ month +"월 "+ day +"일 ("+ week[date.getDay()] +") ";
+      // var convert_hour="";
+      // if(hour < 12){
+      //   hour = _this.fixDigit(hour);
+      //   convert_hour = "오전 " + hour +":" + minute;
+      // } else if (hour == 12){
+      //   convert_hour = "오후 " + hour +":" + minute;
+      // } else {
+      //   hour = _this.fixDigit(hour - 12);
+      //   convert_hour = "오후 " + (hour) +":" + minute;
+      // }
+      // return convert_date + convert_hour;
+    },
+    fixDigit(num) {
+      return num > 9 ? "" + num: "0" + num;
+    },
   }
 }
 </script>
@@ -247,14 +270,13 @@ table.board_content thead th{
   min-width: 50px;
   padding: 10px;
   vertical-align: top;
-  text-align: left;
+  text-align: center;
   font-size: 16px;
 }
 table.board_content thead th.title{
   width: 650px;
   padding: 10px;
   vertical-align: top;
-  text-align: left;
   font-size: 16px;
 }
 table.board_content thead th.date{

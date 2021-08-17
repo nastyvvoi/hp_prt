@@ -3,13 +3,13 @@
         <table class="board_content">
             <thead>
                 <tr>
-                    <th scope="cols">번호</th>
+                    <th scope="cols">{{entityData.title}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td class="newsform_content_area">
-                        ASD
+                        {{entityData.content}}
                     </td>
                 </tr>
                 <tr>
@@ -30,6 +30,7 @@ export default {
 
         }
     },
+    props: ['entityData'],
     methods: {
         onClickBoardList() {
             this.$router.push('/notice')
