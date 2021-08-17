@@ -41,7 +41,10 @@
                 </tr>
             </tbody>
         </table>
-        <button @click="onClickSaveData" class="button-board-list">등록</button>
+        <button v-if="isNew" @click="onClickCreate" class="button-board-list">등록</button>
+        <button v-if="isNew" @click="onClickCancel" class="button-board-list">취소</button>
+        <button v-if="!isNew" @click="onClickUpdate" class="button-board-list">수정</button>
+        <button v-if="!isNew" @click="onClickDelete" class="button-board-list">삭제</button>
     </div>
 </template>
 
@@ -53,12 +56,38 @@ export default {
             content: '',
             images: [],
             deleteImgList: [],
+            params: '',
+            isNew: false,
         }
     },
+    created() {
+        this.params = this.$route.params.id
+        console.log(this.params)
+        if(this.params == 'new')
+            this.isNew = true
+        else 
+            this.isNew = false
+    },
     methods: {
-        onClickSaveData() {
-            this.$router.push('/notice')
-            this.$store.commit('setSecondRoute', '게시판')
+        onClickCreate() {
+            var con_test = confirm("공지사항을 등록하시겠습니까?");
+            if(con_test == true){
+                this.$router.push('/notice/edit')
+                this.$store.commit('setSecondRoute', '게시판')
+            }
+        },
+        onClickCancel() {
+            var con_test = confirm("글 작성을 취소하시겠습니까? 작성중인 모든 데이터는 삭제됩니다.");
+            if(con_test == true){
+                this.$router.push('/notice/edit')
+                this.$store.commit('setSecondRoute', '게시판')
+            }
+        },
+        onClickUpdate() {
+
+        },
+        onClickDelete() {
+
         },
         uploadFiles(e) {
             var fileList = e.target.files

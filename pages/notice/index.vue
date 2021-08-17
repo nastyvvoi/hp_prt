@@ -121,7 +121,7 @@ export default {
   },
   async created() {
     this.rowCount = 10
-    // await this.getData()
+    await this.getData()
     this.totalDataCount = this.dataList.length
     this.paging()
     this.setPageIndex()
@@ -146,14 +146,6 @@ export default {
       this.paging()
     },
     goPrev() {
-      // 한 페이지씩 이동
-      // if(this.currentPage != this.startPage)
-      //   this.currentPage -= 1
-      // if(this.startPage == this.currentPage && this.startPage > 1){
-      //   this.currentPage -= 1
-      //   this.startPage -= this.pageCount
-      //   this.setPageIndex()
-      // }
       this.currentPage = this.startPage - this.pageCount 
       if(this.currentPage < 1)
         this.currentPage = 1
@@ -161,14 +153,6 @@ export default {
       this.paging()
     },
     goNext() {
-      // 한 페이지씩 이동
-      // if(this.endPage != this.currentPage)
-      //   this.currentPage += 1
-      // if(this.endPage == this.currentPage && this.endPage < this.totalPage){
-      //   this.currentPage += 1
-      //   this.startPage += this.pageCount
-      //   this.setPageIndex()
-      // }
       if(this.currentPage + this.pageCount < this.totalPage){
         this.currentPage = this.pageCount + this.startPage
         this.setPageIndex()

@@ -159,10 +159,8 @@ export default {
             this.isMobile = val
         },
     },
-    created() {
-        this.$nextTick(() => {
-            // this.getData()
-        })
+    async created() {
+        await this.getData()
     },
     methods: {
         async getData() {

@@ -14,7 +14,7 @@
                 </tr>
                 <tr>
                     <td  class="newsform_attach_area">
-                        aaa
+                        
                     </td>
                 </tr>
             </tbody>
@@ -60,7 +60,7 @@ table.board_content thead {
 table.board_content thead th {
   width: 1080px;
   padding: 10px;
-  padding-left: 30px;
+  /* padding-left: 30px; */
   font-weight: bold;
   vertical-align: top;
 }
