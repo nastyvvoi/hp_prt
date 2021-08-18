@@ -42,7 +42,23 @@ export default {
       {
         name: 'robots',
         content: 'index'
-      }
+      },
+      {
+        name: 'NaverBot',
+        content: 'All',
+      },
+      {
+        name: 'NaverBot',
+        content: 'index, follow',
+      },
+      {
+        name: 'Yeti',
+        content: 'All',
+      },
+      {
+        name: 'Yeti',
+        content: 'index, follow',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

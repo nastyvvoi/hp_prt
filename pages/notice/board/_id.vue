@@ -36,7 +36,6 @@ export default {
                     this.entityData = doc.data()
                 })
             });
-            console.log("@@@@", this.entityData)
     }
 }
 </script>

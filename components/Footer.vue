@@ -5,7 +5,7 @@
       <b-row>
         <b-col class="ml-sm-auto outer_wrapper" lg="3">
           <div class="logo_area">
-            <img src="~assets/image/Logo_bg_trans.png" style="height:80px;width:253px"/>
+            <img src="~assets/image/Logo_bg_trans.png" style="height:80px;width:253px" alt=""/>
           </div>
         </b-col>
         <b-col class="ml-md-auto outer_wrapper">

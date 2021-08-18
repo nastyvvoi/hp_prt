@@ -9,7 +9,7 @@
       <br>
       <div class="rough_map">
           <br>
-          <img src="~assets/image/rough_map.jpeg"/>
+          <img src="~assets/image/rough_map.jpeg" alt=""/>
       </div>
       <br>
       <hr class="hr_thick"/>

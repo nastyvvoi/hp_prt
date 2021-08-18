@@ -18,7 +18,7 @@ import editForm from '~/components/EditForm.vue';
 export default {
   data() {
     return {
-
+      entityData: {},
     }
   },
   components: {

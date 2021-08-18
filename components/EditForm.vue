@@ -18,7 +18,7 @@
                         <textarea class="textarea" rows="20" style="width:100%" v-model="content" placeholder="내용을 입력하세요."/>
                     </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th>
                         업로드<br>이미지
                     </th>
@@ -38,17 +38,21 @@
                     <td>
                         <input type="file" @change="uploadFiles" multiple/>
                     </td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
         <button v-if="isNew" @click="onClickCreate" class="button-board-list">등록</button>
         <button v-if="isNew" @click="onClickCancel" class="button-board-list">취소</button>
         <button v-if="!isNew" @click="onClickUpdate" class="button-board-list">수정</button>
         <button v-if="!isNew" @click="onClickDelete" class="button-board-list">삭제</button>
+        <button v-if="!isNew" @click="onClickBack" class="button-board-list">돌아가기</button>
     </div>
 </template>
 
 <script>
+import { DB } from "~/services/fireinit.js";
+import { firestorage } from "~/services/fireinit.js";
+
 export default {
     data() {
         return {
@@ -58,20 +62,67 @@ export default {
             deleteImgList: [],
             params: '',
             isNew: false,
+            entityData: {},
+            currentKey: 0,
+            currentDocumentId: '',
+            isAdmin: ''
         }
     },
-    created() {
+    // props: ['entityData'],
+    async created() {
         this.params = this.$route.params.id
-        console.log(this.params)
+        this.currentDocumentId = ''
         if(this.params == 'new')
             this.isNew = true
         else 
             this.isNew = false
+        
+        if(!this.isNew) {
+            await DB.collection('ilshincorp13').doc('noticeBoard').collection('notice').where("key_num", "==", Number(this.params)).get()
+            .then(result => {
+                result.forEach(doc => {
+                    this.entityData = doc.data()
+                    this.currentDocumentId = doc.id
+                })
+            })
+            this.title = this.entityData.title
+            this.content = this.entityData.content
+        }
+        await DB.collection('ilshincorp13').doc('noticeBoard').collection('notice').orderBy("key_num", "desc").limit(1).get()
+        .then(result => {
+            result.forEach(doc => {
+                var data = doc.data()
+                this.currentKey = data.key_num
+            })
+        })
+        await DB.collection('ilshincorp13').doc('admin').get()
+        .then(result => {
+            this.isAdmin = result.data().key_val
+            console.log(this.isAdmin)
+        })
     },
     methods: {
-        onClickCreate() {
+        async onClickCreate() {
+            var isAdmin = prompt("관리자 비밀번호를 입력하세요.")
+            if(isAdmin != this.isAdmin) return alert("비밀번호가 틀렸습니다. 확인 후 다시 시도해주세요.") 
             var con_test = confirm("공지사항을 등록하시겠습니까?");
             if(con_test == true){
+                var newData = {
+                    title: this.title,
+                    content: this.content,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                    key_num: Number(this.currentKey) + 1,
+                    writer: "관리자"
+                }
+                await DB.collection("ilshincorp13").doc("noticeBoard").collection("notice")
+                .add(newData)
+                .then(res => {
+                    alert('공지사항이 등록되었습니다.')
+                })
+                .catch(err => {
+                    alert('공지사항 등록에 실패하였습니다. IT관리자에게 문의하세요.')
+                })
                 this.$router.push('/notice/edit')
                 this.$store.commit('setSecondRoute', '게시판')
             }
@@ -83,11 +134,54 @@ export default {
                 this.$store.commit('setSecondRoute', '게시판')
             }
         },
-        onClickUpdate() {
-
+        async onClickUpdate() {
+            var isAdmin = prompt("관리자 비밀번호를 입력하세요.")
+            if(isAdmin != this.isAdmin) return alert("비밀번호가 틀렸습니다. 확인 후 다시 시도해주세요.") 
+            var con_test = confirm("공지사항을 수정하시겠습니까?");
+            if(con_test == true){
+                var updateData = {
+                    title: this.title,
+                    content: this.content,
+                    createdAt: this.entityData.createdAt,
+                    updatedAt: new Date(),
+                    key_num: Number(this.entityData.key_num),
+                    writer: this.entityData.writer
+                }
+                await DB.collection("ilshincorp13").doc("noticeBoard").collection("notice").doc(this.currentDocumentId)
+                .update(updateData)
+                .then(res => {
+                    alert('공지사항이 수정되었습니다.')
+                })
+                .catch(err => {
+                    alert('공지사항 수정에 실패하였습니다. IT관리자에게 문의하세요.')
+                })
+                this.$router.push('/notice/edit')
+                this.$store.commit('setSecondRoute', '게시판')
+            }
         },
-        onClickDelete() {
-
+        async onClickDelete() {
+            var isAdmin = prompt("관리자 비밀번호를 입력하세요.")
+            if(isAdmin != this.isAdmin) return alert("비밀번호가 틀렸습니다. 확인 후 다시 시도해주세요.") 
+            var con_test = confirm("공지사항을 삭제하시겠습니까? 모든 데이터는 삭제됩니다.");
+            if(con_test == true){
+                await DB.collection("ilshincorp13").doc("noticeBoard").collection("notice").doc(this.currentDocumentId)
+                .delete()
+                .then(res => {
+                    alert('공지사항이 삭제되었습니다.')
+                })
+                .catch(err => {
+                    alert('공지사항 삭제에 실패하였습니다. IT관리자에게 문의하세요.')
+                })
+                this.$router.push('/notice/edit')
+                this.$store.commit('setSecondRoute', '게시판')
+            }
+        },
+        onClickBack() {
+            var con_test = confirm("공지사항 수정을 취소하시겠습니까? 수정중인 데이터는 저장되지 않습니다.");
+            if(con_test == true){
+                this.$router.push('/notice/edit')
+                this.$store.commit('setSecondRoute', '게시판')
+            }
         },
         uploadFiles(e) {
             var fileList = e.target.files

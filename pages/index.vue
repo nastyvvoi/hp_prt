@@ -14,7 +14,7 @@
                                 <p style="padding-top:48px">전문업체입니다.</p>
                             </div>
                             <div class="inner_box_content_img_area about_img">
-                                <img class="inner_box_content_img" src="~assets/image/main_intro.jpeg"/>
+                                <img class="inner_box_content_img" src="~assets/image/main_intro.jpeg" alt=""/>
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="box_content_area">
                              <div class="inner_box_content_img_area product_img">
-                                <img class="inner_box_content_img" src="~assets/image/main_product.png"/>
+                                <img class="inner_box_content_img" src="~assets/image/main_product.png" alt=""/>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
             <div v-if="!isMobile" class="center_area">
                 <v-carousel class="center_carousel">
                     <v-carousel-item class="carousel_items" v-for="(item, index) in carouselData" :key='index'>
-                        <img :src='item.path'>
+                        <img :src='item.path' alt=""/>
                         <div :class="item.class">
                             <p>{{item.text_1}}</p>
                             <p>{{item.text_2}}</p>
@@ -76,7 +76,7 @@
                                 <p style="padding-top:24px">신뢰할 수 있는 기업이 되겠습니다.</p>
                             </div>
                             <div class="inner_box_content_img_area history_img">
-                                <img class="inner_box_content_img" src="~assets/image/main_history.png"/>
+                                <img class="inner_box_content_img" src="~assets/image/main_history.png" alt=""/>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                         </div>
                         <div class="box_content_area">
                             <div class="inner_box_content_img_area factory_img_area">
-                                <img class="inner_box_content_img" src="~assets/image/bg_main.jpeg"/>
+                                <img class="inner_box_content_img" src="~assets/image/bg_main.jpeg" alt=""/>
                             </div>
                         </div>
                     </div>

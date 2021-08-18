@@ -28,18 +28,18 @@
                             <div class="img_box">
                                 <div class="img_box img_box_left">
                                     <div class="img_box_top">
-                                        <img class="product_img" src="~/assets/image/product_1.jpeg"/>
+                                        <img class="product_img" src="~/assets/image/product_1.jpeg" alt=""/>
                                     </div>
                                     <div class="img_box_bottom">
-                                        <img class="product_img" src="~/assets/image/product_3.jpeg"/>
+                                        <img class="product_img" src="~/assets/image/product_3.jpeg" alt=""/>
                                     </div>
                                 </div>
                                 <div class="img_box img_box_right">
                                     <div class="img_box_top">
-                                        <img class="product_img" src="~/assets/image/product_2.jpeg"/>
+                                        <img class="product_img" src="~/assets/image/product_2.jpeg" alt=""/>
                                     </div>
                                     <div class="img_box_bottom">
-                                        <img class="product_img" src="~/assets/image/product_4.jpeg"/>
+                                        <img class="product_img" src="~/assets/image/product_4.jpeg" alt=""/>
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                 <p style="padding-top:20px">CORE 열수에 맞게 가조립하는 공정</p>
                             </div>
                             <div class="img_box">
-                                <img class="product_img" src="~/assets/image/product_5.jpeg"/>
+                                <img class="product_img" src="~/assets/image/product_5.jpeg" alt=""/>
                             </div>
                         </div>
                     </b-col>
@@ -72,7 +72,7 @@
                                 <p style="padding-top:40px">브레이징 JIG를 체결하는 공정</p>
                             </div>
                             <div class="img_box">
-                                <img class="product_img" src="~/assets/image/product_6.jpeg"/>
+                                <img class="product_img" src="~/assets/image/product_6.jpeg" alt=""/>
                             </div>
                         </div>
                     </b-col>
@@ -89,14 +89,14 @@
                             <div class="img_box">
                                 <div class="img_box img_box_left">
                                     <div class="img_box_top">
-                                        <img class="product_img" src="~/assets/image/product_7.jpeg"/>
+                                        <img class="product_img" src="~/assets/image/product_7.jpeg" alt=""/>
                                     </div>
                                     <div class="img_box_bottom">
-                                        <img class="product_img" src="~/assets/image/product_8.jpeg"/>
+                                        <img class="product_img" src="~/assets/image/product_8.jpeg" alt=""/>
                                     </div>
                                 </div>
                                 <div class="img_box img_box_right">
-                                    <img class="product_img" src="~/assets/image/product_9.jpeg"/>
+                                    <img class="product_img" src="~/assets/image/product_9.jpeg" alt=""/>
                                 </div>
                             </div>
                         </div>
@@ -115,10 +115,10 @@
                             </div>
                             <div class="img_box">
                                 <div class="img_box img_box_left">
-                                    <img class="product_img" src="~/assets/image/product_10.jpeg"/>
+                                    <img class="product_img" src="~/assets/image/product_10.jpeg" alt=""/>
                                 </div>
                                 <div class="img_box img_box_right">
-                                    <img class="product_img" src="~/assets/image/product_11.jpeg"/>
+                                    <img class="product_img" src="~/assets/image/product_11.jpeg" alt=""/>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                                 <p style="padding-top:20px">으로 접합하는 공정</p>
                             </div>
                             <div class="img_box">
-                                <img class="product_img" src="~/assets/image/product_12.jpeg"/>
+                                <img class="product_img" src="~/assets/image/product_12.jpeg" alt=""/>
                             </div>
                         </div>
                     </b-col>
@@ -149,7 +149,7 @@
                                 <p style="padding-top:20px">LEAK가 발생하는지 검사하는 공정</p>
                             </div>
                             <div class="img_box">
-                                <img class="product_img" src="~/assets/image/product_13.jpeg"/>
+                                <img class="product_img" src="~/assets/image/product_13.jpeg" alt=""/>
                             </div>
                         </div>
                     </b-col>
@@ -164,10 +164,10 @@
                             </div>
                             <div class="img_box">
                                 <div class="img_box_left">
-                                    <img class="product_img" src="~/assets/image/product_14.jpeg"/>
+                                    <img class="product_img" src="~/assets/image/product_14.jpeg" alt=""/>
                                 </div>
                                 <div class="img_box_right">
-                                    <img class="product_img" src="~/assets/image/product_15.jpeg"/>
+                                    <img class="product_img" src="~/assets/image/product_15.jpeg" alt=""/>
                                 </div>
                             </div>
                         </div>

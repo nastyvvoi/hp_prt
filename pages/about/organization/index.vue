@@ -13,7 +13,7 @@
             </p>
         </div>
         <div class="organization">
-            <img class="organization_img" src="~/assets/image/organization.jpeg"/>
+            <img class="organization_img" src="~/assets/image/organization.jpeg" alt=""/>
         </div>
     </div>
 </template>

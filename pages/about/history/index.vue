@@ -12,7 +12,7 @@
              · 회사 연혁
             </p>
         </div>
-            <img class="history_img" src="~assets/image/history.jpeg"/>
+            <img class="history_img" src="~assets/image/history.jpeg" alt=""/>
         </div>
     </div>
 </template>
