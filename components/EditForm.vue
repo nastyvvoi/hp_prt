@@ -18,27 +18,31 @@
                         <textarea class="textarea" rows="20" style="width:100%" v-model="content" placeholder="내용을 입력하세요."/>
                     </td>
                 </tr>
-                <!-- <tr>
-                    <th>
-                        업로드<br>이미지
-                    </th>
-                    <td>
-                        <div class="image-wrapper" v-for="image in images" :key="image.id">
-                        <img class="image-preview-edit" :src="image.url" :ref="image.url">
-                        <div class="btn-delete">
-                            <span draggable="false" @click="deleteImage(image)"><i class="material-icons">delete_forever</i></span>
-                        </div>
-                        </div>
-                    </td>
-                </tr>
                 <tr>
                     <th>
                         파일첨부
                     </th>
                     <td>
-                        <input type="file" @change="uploadFiles" multiple/>
+                        <input type="file" ref="fileInput" @change="uploadFiles" multiple/>
                     </td>
-                </tr> -->
+                </tr>
+                <tr>
+                    <th>
+                        업로드<br>파일
+                    </th>
+                    <td>
+                        <div v-for="file in files" class="inputWrap">
+                            <input type="search" placeholder="" :value="file.name" readonly/>
+                            <button class="btnClear" @click="deleteFile(file)">x</button>
+                        </div>
+                        <div class="image-wrapper" v-for="image in images" :key="image.id">
+                            <img class="image-preview-edit" :src="image.url" :ref="image.url">
+                            <div class="btn-delete">
+                                <span draggable="false" @click="deleteImage(image)"><i class="material-icons">delete_forever</i></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <button v-if="isNew" @click="onClickCreate" class="button-board-list">등록</button>
@@ -46,6 +50,8 @@
         <button v-if="!isNew" @click="onClickUpdate" class="button-board-list">수정</button>
         <button v-if="!isNew" @click="onClickDelete" class="button-board-list">삭제</button>
         <button v-if="!isNew" @click="onClickBack" class="button-board-list">돌아가기</button>
+        <button @click="onClickFileUpload" class="button-board-list">파일업로드</button>
+        <button @click="onClickFileDownload" class="button-board-list">파일다운로드</button>
     </div>
 </template>
 
@@ -65,7 +71,9 @@ export default {
             entityData: {},
             currentKey: 0,
             currentDocumentId: '',
-            isAdmin: ''
+            isAdmin: '',
+            files: [],
+            deleteFileList: [],
         }
     },
     // props: ['entityData'],
@@ -98,22 +106,36 @@ export default {
         await DB.collection('ilshincorp13').doc('admin').get()
         .then(result => {
             this.isAdmin = result.data().key_val
-            console.log(this.isAdmin)
         })
+    },
+    computed: {
+        selectFileList() {
+            if(this.images.length == 0 && this.files.length == 0) return false
+            return true
+        }
+    },
+    watch: {
+        selectFileList(val) {
+            if(!val) this.$refs.fileInput.value = ""
+        }
     },
     methods: {
         async onClickCreate() {
             var isAdmin = prompt("관리자 비밀번호를 입력하세요.")
             if(isAdmin != this.isAdmin) return alert("비밀번호가 틀렸습니다. 확인 후 다시 시도해주세요.") 
-            var con_test = confirm("공지사항을 등록하시겠습니까?");
+            var con_test = confirm("공지사항을 등록하시겠습니까?")
             if(con_test == true){
+                var fileList = this.images.concat(this.files).map(el => {
+                    return el.name
+                })
                 var newData = {
                     title: this.title,
                     content: this.content,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                     key_num: Number(this.currentKey) + 1,
-                    writer: "관리자"
+                    writer: "관리자",
+                    fileList: fileList
                 }
                 await DB.collection("ilshincorp13").doc("noticeBoard").collection("notice")
                 .add(newData)
@@ -145,7 +167,8 @@ export default {
                     createdAt: this.entityData.createdAt,
                     updatedAt: new Date(),
                     key_num: Number(this.entityData.key_num),
-                    writer: this.entityData.writer
+                    writer: this.entityData.writer,
+                    fileList: []
                 }
                 await DB.collection("ilshincorp13").doc("noticeBoard").collection("notice").doc(this.currentDocumentId)
                 .update(updateData)
@@ -184,21 +207,42 @@ export default {
             }
         },
         uploadFiles(e) {
+            if(e == "") return
             var fileList = e.target.files
             var _this = this
             Array.from(fileList).forEach(item => {
-                if (!item.type.match(/image\//))
-                return
-                var reader = new FileReader()
-                reader.onload = function(e) {
-                    var image = {
-                        id: item.name + Date.now(),
-                        url: e.target.result,
-                        file: item
+                if (!item.type.match(/image\//)){
+                    var reader = new FileReader()
+                    reader.onload = function(e) {
+                        var file = {
+                            id: item.name + Date.now(),
+                            name: item.name,
+                            url: e.target.result,
+                            file: item
+                        }
+                        _this.files.push(file)
                     }
-                    _this.images.push(image)
+                    reader.readAsDataURL(item)
+                } else {
+                    var reader = new FileReader()
+                    reader.onload = function(e) {
+                        var image = {
+                            id: item.name + Date.now(),
+                            name: item.name,
+                            url: e.target.result,
+                            file: item
+                        }
+                        _this.images.push(image)
+                    }
+                    reader.readAsDataURL(item)
                 }
-                reader.readAsDataURL(item)
+            })
+        },
+        deleteFile(data) {
+            this.deleteFileList = []
+            this.files = this.files.filter(item => {
+                if(item.id == data.id) this.deleteFileList.push(data.id)
+                return item.id != data.id
             })
         },
         deleteImage(data) {
@@ -208,6 +252,54 @@ export default {
                 return item.id != data.id
             })
         },
+        upload(file) {
+            this.fileName = file.name
+            this.uploading = true
+            this.uploadTask = firestorage.ref(file.name).put(file)
+        },
+        async onClickFileUpload() {
+            var fileArr = this.images.concat(this.files)
+            console.log("fileArr", fileArr)
+            
+            firestorage.ref().constructor.prototype.putFiles = function(fileArr) { 
+                var ref = this;
+                return Promise.all(fileArr.map(function(file) {
+                    return ref.child(file.name).put(file);
+                }))
+            }
+
+            firestorage.ref("test/").putFiles(fileArr)
+                .then(function(metadatas) {
+                    console.log(metadatas)
+                }).catch(function(error) {
+                    console.log(error)
+                })
+        },
+        async onClickFileDownload() {
+            var fileRef = firestorage.ref("temp/" + "robots.txt")
+            console.log("TEMP", fileRef)
+            console.log("TEMP@@@", fileRef.name)
+            fileRef.getDownloadURL()
+            .then(url => {
+                console.log(url)
+                const xhr = new XMLHttpRequest();
+                xhr.responseType = 'blob';
+                xhr.onload = function () {
+                    const blob = xhr.response;
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = fileRef.name.split('.')[0]
+                    link.click();
+                    URL.revokeObjectURL(link.href);
+                }
+                xhr.open('GET', url);
+                xhr.send();
+            })
+            .catch(error => {
+            // Handle any errors
+            console.log(error);
+            })
+        }
     }
 }
 
@@ -307,8 +399,8 @@ table.board_content td {
   right: 10px;
   top: 10px;
   background:#555;
-  width:44px;
-  height:44px;
+  width:36px;
+  height:36px;
   border-radius:50%;
   opacity:0;
 }
@@ -334,5 +426,43 @@ input[type="text"], textarea {
   border-radius: 2px;
   font-size: 14px;
   padding: 4px;
+}
+
+input::-ms-clear,
+input::-ms-reveal{
+	display:none;width:0;height:0;
+}
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration{
+	display:none;
+}
+
+.inputWrap {
+    position: relative;
+    height: 30px;
+    width: 240px;
+    display: block;
+    padding-left: 6px;
+ }
+  
+.inputWrap input {
+    padding-right: 30px;
+    height: inherit;
+    outline: none;
+}
+
+.inputWrap .btnClear {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    background-color: #a6a6a6;
+    border-radius: 50%;
+    border: none;
+    outline: none;
 }
 </style>
