@@ -28,7 +28,12 @@
                     <tbody v-if="this.totalDataCount">
                         <tr v-for="(item, index) in this.pagingData" :key="index">
                             <th scope="row">{{item.key_num}}</th>
-                            <td class="title"><span @click="onClickNotice(item.key_num)">{{item.title}}</span></td>
+                            <td class="title">
+                              <span v-if="item.fileList && item.fileList.length > 0" class="material-icons-outlined" style="font-size:16px;vertical-align:middle">
+                                attach_file
+                              </span>
+                              <span class="underline" @click="onClickNotice(item.key_num)">{{item.title}}</span>
+                            </td>
                             <td class="date">{{secondsToDate(item.createdAt.seconds)}}</td>
                             <td class="writer">{{item.writer}}</td>
                         </tr>
@@ -302,7 +307,7 @@ table.board_content td.title {
   font-size: 16px;
 }
 
-table.board_content td.title span:hover {
+table.board_content td.title span.underline:hover {
     cursor: pointer;
     text-decoration: underline;
 }

@@ -3,18 +3,21 @@
         <table class="board_content">
             <thead>
                 <tr>
-                    <th scope="cols">{{entityData.title}}</th>
+                    <th colspan="2" scope="cols">{{entityData.title}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="newsform_content_area">
+                    <td colspan="2" class="newsform_content_area">
                         {{entityData.content}}
                     </td>
                 </tr>
                 <tr>
+                    <td class="attached_file">
+                        <span>첨부파일</span>
+                    </td>
                     <td  class="newsform_attach_area">
-                        
+                        <a class="file_link" v-for="file in files" :href="file.url" download>{{file.name}}</a>
                     </td>
                 </tr>
             </tbody>
@@ -24,17 +27,48 @@
 </template>
 
 <script>
+import { firestorage } from "~/services/fireinit.js";
+
 export default {
     data() {
         return {
-
+            files: [],
         }
     },
     props: ['entityData'],
+    watch: {
+        async entityData(val) {
+            await this.getDownloadUrls()
+        }
+    },
+    created() {
+        this.files = []
+    },
     methods: {
         onClickBoardList() {
             this.$router.push('/notice')
             this.$store.commit('setSecondRoute', '게시판')
+        },
+        async getDownloadUrls() {
+            var _this = this
+            
+            firestorage.ref("attached/").constructor.prototype.getAttachedFileUrls = function(fileArr) { 
+                var ref = this;
+                return Promise.all(fileArr.map(async function(file) {
+                    var url = await ref.child(file).getDownloadURL().then(result => {
+                        return result
+                    })
+                    return { name: file, url: url }
+                }))
+            }
+
+            await firestorage.ref("attached/").getAttachedFileUrls(this.entityData.fileList)
+                .then(function(result) {
+                    _this.files = result
+                    _this.$forceUpdate()
+                }).catch(function(error) {
+                    console.log(error)
+                })
         }
     }
 }
@@ -82,6 +116,22 @@ table.board_content td.newsform_attach_area {
   text-align: left;
   font-size: 16px;
   border-bottom: 1px solid #ccc;
+}
+
+table.board_content td.attached_file {
+    width: 110px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    vertical-align: top;
+}
+
+.file_link {
+    color: #1266FF;
+    display:block;
+}
+
+.file_link:hover {
+    color: #5F00FF;
 }
 
 .button-board-list {

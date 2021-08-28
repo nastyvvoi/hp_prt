@@ -20,7 +20,7 @@
                 </tr>
                 <tr>
                     <th>
-                        파일첨부
+                        파일올리기
                     </th>
                     <td>
                         <input type="file" ref="fileInput" @change="uploadFiles" multiple/>
@@ -28,18 +28,12 @@
                 </tr>
                 <tr>
                     <th>
-                        업로드<br>파일
+                        첨부파일
                     </th>
                     <td>
-                        <div v-for="file in files" class="inputWrap">
-                            <input type="search" placeholder="" :value="file.name" readonly/>
-                            <button class="btnClear" @click="deleteFile(file)">x</button>
-                        </div>
-                        <div class="image-wrapper" v-for="image in images" :key="image.id">
-                            <img class="image-preview-edit" :src="image.url" :ref="image.url">
-                            <div class="btn-delete">
-                                <span draggable="false" @click="deleteImage(image)"><i class="material-icons">delete_forever</i></span>
-                            </div>
+                        <div class="inputWrap" v-for="item in fileList" :key="item.name">
+                            <input type="search" placeholder="" :value="item.name" readonly/>
+                            <button class="btnClear" @click="deleteItem(item)">x</button>
                         </div>
                     </td>
                 </tr>
@@ -49,9 +43,7 @@
         <button v-if="isNew" @click="onClickCancel" class="button-board-list">취소</button>
         <button v-if="!isNew" @click="onClickUpdate" class="button-board-list">수정</button>
         <button v-if="!isNew" @click="onClickDelete" class="button-board-list">삭제</button>
-        <button v-if="!isNew" @click="onClickBack" class="button-board-list">돌아가기</button>
-        <button @click="onClickFileUpload" class="button-board-list">파일업로드</button>
-        <button @click="onClickFileDownload" class="button-board-list">파일다운로드</button>
+        <button v-if="!isNew" @click="onClickBack" class="button-board-list">목록</button>
     </div>
 </template>
 
@@ -64,15 +56,14 @@ export default {
         return {
             title: '',
             content: '',
-            images: [],
-            deleteImgList: [],
             params: '',
             isNew: false,
             entityData: {},
             currentKey: 0,
             currentDocumentId: '',
             isAdmin: '',
-            files: [],
+            isUpdated: false,
+            fileList: [],
             deleteFileList: [],
         }
     },
@@ -80,6 +71,7 @@ export default {
     async created() {
         this.params = this.$route.params.id
         this.currentDocumentId = ''
+        this.deleteFileList = []
         if(this.params == 'new')
             this.isNew = true
         else 
@@ -95,6 +87,8 @@ export default {
             })
             this.title = this.entityData.title
             this.content = this.entityData.content
+            if(this.entityData.fileList.length > 0)
+                this.fileList = this.entityData.fileList.map(el => {return {name:el}})
         }
         await DB.collection('ilshincorp13').doc('noticeBoard').collection('notice').orderBy("key_num", "desc").limit(1).get()
         .then(result => {
@@ -110,7 +104,8 @@ export default {
     },
     computed: {
         selectFileList() {
-            if(this.images.length == 0 && this.files.length == 0) return false
+            if(!this.fileList) return false
+            if(this.fileList.length == 0) return false
             return true
         }
     },
@@ -125,9 +120,11 @@ export default {
             if(isAdmin != this.isAdmin) return alert("비밀번호가 틀렸습니다. 확인 후 다시 시도해주세요.") 
             var con_test = confirm("공지사항을 등록하시겠습니까?")
             if(con_test == true){
-                var fileList = this.images.concat(this.files).map(el => {
+                var fileList = this.fileList.map(el => {
                     return el.name
                 })
+                if(!this.onClickFileUpload(this.fileList))
+                    return alert("공지사항 등록에 실패했습니다.  IT관리자에게 문의하세요. ERROR CODE: A001")
                 var newData = {
                     title: this.title,
                     content: this.content,
@@ -135,7 +132,7 @@ export default {
                     updatedAt: new Date(),
                     key_num: Number(this.currentKey) + 1,
                     writer: "관리자",
-                    fileList: fileList
+                    fileList: fileList,
                 }
                 await DB.collection("ilshincorp13").doc("noticeBoard").collection("notice")
                 .add(newData)
@@ -143,7 +140,7 @@ export default {
                     alert('공지사항이 등록되었습니다.')
                 })
                 .catch(err => {
-                    alert('공지사항 등록에 실패하였습니다. IT관리자에게 문의하세요.')
+                    alert('공지사항 등록에 실패하였습니다. IT관리자에게 문의하세요. ERROR CODE: A002')
                 })
                 this.$router.push('/notice/edit')
                 this.$store.commit('setSecondRoute', '게시판')
@@ -161,6 +158,11 @@ export default {
             if(isAdmin != this.isAdmin) return alert("비밀번호가 틀렸습니다. 확인 후 다시 시도해주세요.") 
             var con_test = confirm("공지사항을 수정하시겠습니까?");
             if(con_test == true){
+                var fileList = this.fileList.map(el => {
+                    return el.name
+                })
+                if(!this.updateAttachedFile())
+                    return alert("공지사항 수정에 실패했습니다.  IT관리자에게 문의하세요. ERROR CODE: B001")
                 var updateData = {
                     title: this.title,
                     content: this.content,
@@ -168,7 +170,7 @@ export default {
                     updatedAt: new Date(),
                     key_num: Number(this.entityData.key_num),
                     writer: this.entityData.writer,
-                    fileList: []
+                    fileList: fileList,
                 }
                 await DB.collection("ilshincorp13").doc("noticeBoard").collection("notice").doc(this.currentDocumentId)
                 .update(updateData)
@@ -176,7 +178,7 @@ export default {
                     alert('공지사항이 수정되었습니다.')
                 })
                 .catch(err => {
-                    alert('공지사항 수정에 실패하였습니다. IT관리자에게 문의하세요.')
+                    alert('공지사항 수정에 실패하였습니다. IT관리자에게 문의하세요. ERROR CODE: B002')
                 })
                 this.$router.push('/notice/edit')
                 this.$store.commit('setSecondRoute', '게시판')
@@ -187,13 +189,15 @@ export default {
             if(isAdmin != this.isAdmin) return alert("비밀번호가 틀렸습니다. 확인 후 다시 시도해주세요.") 
             var con_test = confirm("공지사항을 삭제하시겠습니까? 모든 데이터는 삭제됩니다.");
             if(con_test == true){
+                if(!this.deleteAttachedFile(this.fileList))
+                    return alert("공지사항 삭제에 실패하였습니다. IT관리자에게 문의하세요. ERROCODE: D001")
                 await DB.collection("ilshincorp13").doc("noticeBoard").collection("notice").doc(this.currentDocumentId)
                 .delete()
                 .then(res => {
                     alert('공지사항이 삭제되었습니다.')
                 })
                 .catch(err => {
-                    alert('공지사항 삭제에 실패하였습니다. IT관리자에게 문의하세요.')
+                    alert('공지사항 삭제에 실패하였습니다. IT관리자에게 문의하세요. ERROCODE: D002')
                 })
                 this.$router.push('/notice/edit')
                 this.$store.commit('setSecondRoute', '게시판')
@@ -211,45 +215,23 @@ export default {
             var fileList = e.target.files
             var _this = this
             Array.from(fileList).forEach(item => {
-                if (!item.type.match(/image\//)){
-                    var reader = new FileReader()
-                    reader.onload = function(e) {
-                        var file = {
-                            id: item.name + Date.now(),
-                            name: item.name,
-                            url: e.target.result,
-                            file: item
-                        }
-                        _this.files.push(file)
+                var reader = new FileReader()
+                reader.onload = function(e) {
+                    var data = {
+                        id: item.name + Date.now(),
+                        name: item.name,
+                        url: e.target.result,
+                        file: item
                     }
-                    reader.readAsDataURL(item)
-                } else {
-                    var reader = new FileReader()
-                    reader.onload = function(e) {
-                        var image = {
-                            id: item.name + Date.now(),
-                            name: item.name,
-                            url: e.target.result,
-                            file: item
-                        }
-                        _this.images.push(image)
-                    }
-                    reader.readAsDataURL(item)
+                    _this.fileList.push(data)
                 }
+                reader.readAsDataURL(item)
             })
         },
-        deleteFile(data) {
-            this.deleteFileList = []
-            this.files = this.files.filter(item => {
-                if(item.id == data.id) this.deleteFileList.push(data.id)
-                return item.id != data.id
-            })
-        },
-        deleteImage(data) {
-            this.deleteImgList = []
-            this.images = this.images.filter(item => {
-                if(item.id == data.id) this.deleteImgList.push(data.id)
-                return item.id != data.id
+        deleteItem(data) {
+            this.fileList = this.fileList.filter(item => {
+                if(item.name == data.name) this.deleteFileList.push(data)
+                return item.name != data.name
             })
         },
         upload(file) {
@@ -257,10 +239,7 @@ export default {
             this.uploading = true
             this.uploadTask = firestorage.ref(file.name).put(file)
         },
-        async onClickFileUpload() {
-            var fileArr = this.images.concat(this.files)
-            console.log("fileArr", fileArr)
-            
+        async onClickFileUpload(fileArr) {
             firestorage.ref().constructor.prototype.putFiles = function(fileArr) { 
                 var ref = this;
                 return Promise.all(fileArr.map(function(file) {
@@ -268,38 +247,90 @@ export default {
                 }))
             }
 
-            firestorage.ref("test/").putFiles(fileArr)
+            await firestorage.ref("attached/").putFiles(fileArr)
                 .then(function(metadatas) {
-                    console.log(metadatas)
+                    return true
+                }).catch(function(error) {
+                    return false
+                })
+        },
+        async updateAttachedFile() {
+            var uploadFiles = this.fileList
+            uploadFiles = uploadFiles.filter(el => {
+                return el.id != null
+            })
+            var deleteFiles = this.deleteFileList
+            deleteFiles = deleteFiles.filter(el => {
+                return !el.id
+            })
+            await this.onClickFileUpload(uploadFiles)
+            await this.deleteAttachedFile(deleteFiles)
+        },
+        async deleteAttachedFile(fileArr) {
+            firestorage.ref("attached/").constructor.prototype.deleteFiles = function(fileArr) { 
+                var ref = this;
+                return Promise.all(fileArr.map(function(file) {
+                    var url = ref.child(file.name).delete()
+                }))
+            }
+
+            await firestorage.ref("attached/").deleteFiles(fileArr)
+                .then(function(result) {
+                    return true
+                }).catch(function(error) {
+                    return false
+                })
+        },
+        async getImageUrl() {
+            var _this = this
+            
+            firestorage.ref("attached/").constructor.prototype.getImageUrls = function(fileArr) { 
+                var ref = this;
+                return Promise.all(fileArr.map(async function(file) {
+                    var url = await ref.child(file.name).getDownloadURL().then(result => {
+                        var xhr = new XMLHttpRequest();
+                        xhr.responseType = 'blob';
+                            xhr.onload = function(event) {
+                            var blob = xhr.response;
+                        }
+                        xhr.open('GET', result);
+                        xhr.send();
+                        return result
+                    })
+                    return { name: file.name, url: url }
+                }))
+            }
+
+            await firestorage.ref("attached/").getImageUrls(this.attachedImages)
+                .then(function(result) {
+                    _this.attachedImages = result
+                    _this.$forceUpdate()
                 }).catch(function(error) {
                     console.log(error)
                 })
         },
-        async onClickFileDownload() {
-            var fileRef = firestorage.ref("temp/" + "robots.txt")
-            console.log("TEMP", fileRef)
-            console.log("TEMP@@@", fileRef.name)
-            fileRef.getDownloadURL()
-            .then(url => {
-                console.log(url)
-                const xhr = new XMLHttpRequest();
-                xhr.responseType = 'blob';
-                xhr.onload = function () {
-                    const blob = xhr.response;
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = fileRef.name.split('.')[0]
-                    link.click();
-                    URL.revokeObjectURL(link.href);
-                }
-                xhr.open('GET', url);
-                xhr.send();
-            })
-            .catch(error => {
-            // Handle any errors
-            console.log(error);
-            })
-        }
+        // async onClickFileDownload() {
+        //     var fileRef = firestorage.ref("attached/" + "robots.txt")
+        //     fileRef.getDownloadURL()
+        //     .then(url => {
+        //         const xhr = new XMLHttpRequest();
+        //         xhr.responseType = 'blob';
+        //         xhr.onload = function () {
+        //             const blob = xhr.response;
+        //             const link = document.createElement('a');
+        //             link.href = URL.createObjectURL(blob);
+        //             link.download = fileRef.name.split('.')[0]
+        //             link.click();
+        //             URL.revokeObjectURL(link.href);
+        //         }
+        //         xhr.open('GET', url);
+        //         xhr.send();
+        //     })
+        //     .catch(error => {
+        //     // Handle any errors
+        //     console.log(error);
+        //     })
+        // }
     }
 }
 

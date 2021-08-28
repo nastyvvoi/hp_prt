@@ -29,7 +29,6 @@ export default {
     },
     async created() {
         var params = this.$route.params
-        console.log(params.id)
         await DB.collection('ilshincorp13').doc('noticeBoard').collection('notice').where("key_num", "==", Number(params.id)).get()
             .then(result => {
                 result.forEach(doc => {

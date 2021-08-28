@@ -28,7 +28,12 @@
                     <tbody v-if="this.totalDataCount">
                         <tr v-for="(item, index) in this.pagingData" :key="index">
                             <th scope="row">{{item.key_num}}</th>
-                            <td class="title"><span @click="onClickNotice(item.key_num)">{{item.title}}</span></td>
+                            <td class="title">
+                              <span v-if="item.fileList && item.fileList.length > 0" class="material-icons-outlined" style="font-size:16px;vertical-align:middle">
+                                attach_file
+                              </span>
+                              <span class="underline" @click="onClickNotice(item.key_num)">{{item.title}}</span>
+                            </td>
                             <td class="date">{{secondsToDate(item.createdAt.seconds)}}</td>
                             <td class="writer">{{item.writer}}</td>
                         </tr>
@@ -197,18 +202,6 @@ export default {
       var minute = _this.fixDigit(date.getMinutes());
       var week = new Array('일', '월', '화', '수', '목', '금', '토');
       return year + '-' + month + '-' + day
-      // var convert_date = year + "년 "+ month +"월 "+ day +"일 ("+ week[date.getDay()] +") ";
-      // var convert_hour="";
-      // if(hour < 12){
-      //   hour = _this.fixDigit(hour);
-      //   convert_hour = "오전 " + hour +":" + minute;
-      // } else if (hour == 12){
-      //   convert_hour = "오후 " + hour +":" + minute;
-      // } else {
-      //   hour = _this.fixDigit(hour - 12);
-      //   convert_hour = "오후 " + (hour) +":" + minute;
-      // }
-      // return convert_date + convert_hour;
     },
     fixDigit(num) {
       return num > 9 ? "" + num: "0" + num;
@@ -305,7 +298,7 @@ table.board_content td.title {
   font-size: 16px;
 }
 
-table.board_content td.title span:hover {
+table.board_content td.title span.underline:hover {
     cursor: pointer;
     text-decoration: underline;
 }
