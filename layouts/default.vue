@@ -2,10 +2,12 @@
   <div class="app">
     <div class="main">
       <Navbar/>
+      <!-- <Navbar v-if="code"/> -->
       <div :class="{ main_container : !isMobile && !isMain}">
         <nuxt/>
       </div>
       <Footer/>
+      <!-- <Footer v-if="code"/> -->
     </div>
   </div>
 </template>
@@ -13,7 +15,7 @@
 <script>
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
-
+import { DB } from "~/services/fireinit.js";
 
 export default {
   data() {
@@ -26,6 +28,7 @@ export default {
       offsetWidth: "",
       isMobile: false,
       isMain: true,
+      code: "",
     };
   },
   methods: {
@@ -66,9 +69,17 @@ export default {
       this.isMain = val
     },
   },
-  created() {
-    
-  },
+  // async beforeCreate() {
+  //   this.code = await DB.collection('ilshincorp13').doc('admin').get()
+  //       .then(result => {
+  //         return result.data().ex_num
+  //       })
+
+  //   if(this.code == 0) {
+  //     var location = window.location
+  //     throw new Error('Internal Server Error\n' + location)
+  //   }
+  // },
   beforeMount() {
     this.$nextTick(() => {
       this.defaultCheck();

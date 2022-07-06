@@ -41,8 +41,8 @@
                                 <p><span class="material-icons-outlined phone_num_icon">phone_in_talk</span>055-585-0686</p>
                             </div>
                             <div class="inner_box_text op_time" style="margin-left:10px">
-                                <p>평일 : 08:30 ~ 17:30 </p>
-                                <p style="padding-top:24px">점심 : 12:30 ~ 13:30</p>
+                                <p>평일 : 08:00 ~ 17:00 </p>
+                                <p style="padding-top:24px">점심 : 12:00 ~ 13:00</p>
                             </div>
                             <div class="location_btn_area" style="margin-left:10px">
                                 <button class="location_btn">

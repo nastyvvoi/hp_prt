@@ -11,6 +11,32 @@
           <br>
           <img src="~assets/image/rough_map.jpeg" alt=""/>
       </div>
+      <!-- <div class="facility_pic"> -->
+          <b-container class="location_fac_container">
+              <b-row class="location_fac_row text-center" align-v="center">
+                  <b-col class="ml-md-auto outer_wrapper text-center">
+                      <div class="location_fac_outer_box">
+                          <div class="img_box">
+                              <img class="location_fac_img" src="~/assets/image/location_fac_1.jpeg" alt=""/>
+                          </div>
+                          <div class="location_description_text">
+                              <p>본사 2공장 (주식회사 일신)</p>
+                          </div>
+                      </div>
+                  </b-col>
+                  <b-col class="ml-md-auto outer_wrapper text-center">
+                      <div class="location_fac_outer_box">
+                          <div class="img_box">
+                              <img class="location_fac_img" src="~/assets/image/location_fac_2.jpeg" alt=""/>
+                          </div>
+                          <div class="location_description_text">
+                              <p>1공장 (주식회사 일신 브레이징)</p>
+                          </div>
+                      </div>
+                  </b-col>
+              </b-row>
+          </b-container>
+      <!-- </div> -->
       <br>
       <hr class="hr_thick"/>
       <div class="address_wrapper">
@@ -88,7 +114,7 @@
 }
 
 .rough_map {
-  max-width: 960px;
+  max-width: 760px;
   width: 100%;
   height: auto;
   border: 2px solid #cccccc;
@@ -96,9 +122,43 @@
 }
 
 .rough_map img {
-  max-width: 960px;
+  max-width: 760px;
   width: 100%;
   height: auto;
+}
+
+.location_fac_row {
+    align: center;
+}
+
+.outer_wrapper {
+    text-align: left;
+}
+.location_fac_outer_box {
+    max-width: 560px;
+    width: 100%;
+    margin: auto;
+    position: relative;
+}
+
+.location_description_text {
+    height: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.img_box {
+    border: 1px solid #9c9c9c;
+    overflow: hidden;
+    display: inline-block;
+    margin: auto;
+}
+
+.img_box img {
+    top:0;
+    left: 0;
+    max-width: 560px;
+    height: auto;
 }
 
 .hr_thick {
